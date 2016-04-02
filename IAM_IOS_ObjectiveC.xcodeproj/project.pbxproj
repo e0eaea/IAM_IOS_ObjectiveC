@@ -210,6 +210,7 @@
 				TargetAttributes = {
 					A3B128731CAFB6E2005FBCB9 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = B6WULSG6KC;
 					};
 					A3B1288F1CAFB6E3005FBCB9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -417,9 +418,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = IAM_IOS_ObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "mobile.IAM-IOS-ObjectiveC";
+				PRODUCT_BUNDLE_IDENTIFIER = Minkyu.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -428,9 +430,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = IAM_IOS_ObjectiveC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "mobile.IAM-IOS-ObjectiveC";
+				PRODUCT_BUNDLE_IDENTIFIER = Minkyu.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
