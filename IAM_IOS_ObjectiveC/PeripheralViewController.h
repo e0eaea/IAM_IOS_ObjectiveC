@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PeripheralViewController.h
 //  IAM_IOS_ObjectiveC
 //
 //  Created by KMK on 2016. 4. 2..
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface PeripheralViewController : UIViewController
 
 @end
-
