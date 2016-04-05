@@ -25,6 +25,9 @@
 		A3B128E71CB141B4005FBCB9 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128E61CB141B4005FBCB9 /* Client.m */; };
 		A3B128EA1CB14528005FBCB9 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128E91CB14528005FBCB9 /* NSData+Base64.m */; };
 		A3B128ED1CB15567005FBCB9 /* ClientList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128EC1CB15567005FBCB9 /* ClientList.m */; };
+		A3B128F11CB29315005FBCB9 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128EF1CB29315005FBCB9 /* SearchTableViewCell.m */; };
+		A3B128F21CB29315005FBCB9 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B128F01CB29315005FBCB9 /* SearchTableViewCell.xib */; };
+		A3B128F61CB296B5005FBCB9 /* Brief_profile.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128F51CB296B5005FBCB9 /* Brief_profile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,11 @@
 		A3B128E91CB14528005FBCB9 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A3B128EB1CB15567005FBCB9 /* ClientList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientList.h; sourceTree = "<group>"; };
 		A3B128EC1CB15567005FBCB9 /* ClientList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientList.m; sourceTree = "<group>"; };
+		A3B128EE1CB29315005FBCB9 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
+		A3B128EF1CB29315005FBCB9 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
+		A3B128F01CB29315005FBCB9 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		A3B128F41CB296B5005FBCB9 /* Brief_profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brief_profile.h; sourceTree = "<group>"; };
+		A3B128F51CB296B5005FBCB9 /* Brief_profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brief_profile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +160,11 @@
 				A3B1288B1CAFB6E2005FBCB9 /* Info.plist */,
 				A3B128831CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC.xcdatamodeld */,
 				A3B128771CAFB6E2005FBCB9 /* Supporting Files */,
+				A3B128EE1CB29315005FBCB9 /* SearchTableViewCell.h */,
+				A3B128EF1CB29315005FBCB9 /* SearchTableViewCell.m */,
+				A3B128F01CB29315005FBCB9 /* SearchTableViewCell.xib */,
+				A3B128F41CB296B5005FBCB9 /* Brief_profile.h */,
+				A3B128F51CB296B5005FBCB9 /* Brief_profile.m */,
 			);
 			path = IAM_IOS_ObjectiveC;
 			sourceTree = "<group>";
@@ -301,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3B1288A1CAFB6E2005FBCB9 /* LaunchScreen.storyboard in Resources */,
+				A3B128F21CB29315005FBCB9 /* SearchTableViewCell.xib in Resources */,
 				A3B128871CAFB6E2005FBCB9 /* Assets.xcassets in Resources */,
 				A3B128821CAFB6E2005FBCB9 /* Main.storyboard in Resources */,
 			);
@@ -330,12 +344,14 @@
 				A3B128851CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC.xcdatamodeld in Sources */,
 				A3B128ED1CB15567005FBCB9 /* ClientList.m in Sources */,
 				A3B128B71CB008A7005FBCB9 /* MenuViewController.m in Sources */,
+				A3B128F61CB296B5005FBCB9 /* Brief_profile.m in Sources */,
 				A3B1287C1CAFB6E2005FBCB9 /* AppDelegate.m in Sources */,
 				A3B128B11CB007DC005FBCB9 /* CentralViewController.m in Sources */,
 				A3B128B41CB007EF005FBCB9 /* PeripheralViewController.m in Sources */,
 				A3B128EA1CB14528005FBCB9 /* NSData+Base64.m in Sources */,
 				A3B128791CAFB6E2005FBCB9 /* main.m in Sources */,
 				A3B128E71CB141B4005FBCB9 /* Client.m in Sources */,
+				A3B128F11CB29315005FBCB9 /* SearchTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

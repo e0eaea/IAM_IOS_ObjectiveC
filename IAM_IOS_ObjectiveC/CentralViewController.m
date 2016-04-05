@@ -8,14 +8,20 @@
 
 #import "CentralViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "SearchTableViewCell.h"
+#import "Brief_profile.h"
 
 #import "UUID_Define.h"
+
 
 @interface CentralViewController ()  <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextView   *uuid_setting;
 @property (strong, nonatomic) IBOutlet UIButton     *filter_button;
-@property (strong, nonatomic) IBOutlet UILabel   *name;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic)  NSMutableArray * tableData;
+
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 @property (strong, nonatomic) NSMutableData         *data;
@@ -32,7 +38,8 @@
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
     // And somewhere to store the incoming data
-    _data = [[NSMutableData alloc] init];
+   // _data = [[NSMutableData alloc] init];
+    _tableData=[NSMutableArray new];
     
    // [self startTimedTask];
 }
@@ -73,6 +80,7 @@
        NSLog(@"Scanning started");
    
       [self.centralManager scanForPeripheralsWithServices:nil options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+    
       
  
 }
@@ -108,13 +116,30 @@
     
     NSLog(@"Discovered %@ at %@,%@", peripheral.name,advertisementData, RSSI);
     
-    NSString *s=[advertisementData objectForKey:@"kCBAdvDataLocalName"];
+    NSString *name=[advertisementData objectForKey:@"kCBAdvDataLocalName"];
+   // NSString *uuid=[advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"][0];
     
-    NSLog(@"원하는 값만 뽑아보자! %@", s);
+    if(!name) name=@"이름없음";
+    //if(!uuid) uuid=@"UUID없음";
+    
+    //NSLog(@"원하는 값만 뽑아보자! %@", uuid);
+    
+    Brief_profile *new_member=[[Brief_profile alloc]init];
+    new_member.name= name;
+   // new_member.uuid= uuid;
     
 
+    [_tableData addObject:new_member];
+    [_tableView reloadData];
     
-   self.name.text=s;
+    
+    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:[_tableData count]-1
+                                                   inSection:0];
+    
+    [_tableView scrollToRowAtIndexPath:topIndexPath
+                  atScrollPosition:UITableViewScrollPositionMiddle
+                          animated:YES];
+
     
 }
 
@@ -133,6 +158,45 @@
     [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:_uuid_setting.text]]
                                                 options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
     
+}
+
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+
+//섹션의 row갯수 반환
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    
+    return _tableData.count;
+}
+
+// 셀 만들기
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    SearchTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"SearchTableViewCell" owner:self options:nil] objectAtIndex:0];
+    
+    
+    cell.type=_tableData[indexPath.row];
+    
+    [cell adjust];
+    
+    return cell;
+}
+
+//섹션 헤더 높이
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
 }
 
 
