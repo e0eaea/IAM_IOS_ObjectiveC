@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-uC-L87">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-uC-L87">
                                 <rect key="frame" x="-8" y="0.0" width="387" height="681"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DuY-uC-L87" secondAttribute="height" multiplier="379:667" id="P1e-k1-VKk"/>
@@ -104,7 +104,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background.png" width="1080" height="1920"/>
+        <image name="login-bg.png" width="1080" height="1920"/>
         <image name="name_field.png" width="572" height="8"/>
         <image name="next.png" width="570" height="90"/>
         <image name="sign_up.png" width="435" height="70"/>

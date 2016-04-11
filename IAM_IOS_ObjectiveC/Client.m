@@ -19,7 +19,7 @@
     NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
     
     
-    NSString *userJsonData = [Common_Module transToJson:client_data];
+    NSString *userJsonData = [Common_modules transToJson:client_data];
     
     [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:brief_info];
     

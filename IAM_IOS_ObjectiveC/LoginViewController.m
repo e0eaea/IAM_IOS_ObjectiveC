@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import <sys/utsname.h>
-#import "Common_Module.h"
+#import "Common_Modules.h"
 #import "MainViewController.h"
 
 @interface LoginViewController ()
@@ -43,7 +43,7 @@
     
     if([_name_field.text isEqualToString:@""])
     {
-        [Common_Module alert_show:@"" message:@"이름을 입력하시오" yes:@"" no:@""];
+        [Common_modules alert_show:self title:@"" message:@"이름을 입력하시오" yes:@"" no:@""];
     }
     //아이디가 있는 것인지 데이터베이스,서버에서 확인
     else{
@@ -82,7 +82,7 @@
             NSLog(@"Already erolled user : %@", info);
             _myinfo = (MyInfo *)info;
             
-             [Common_Module alert_show:@"" message:@"기존 아이디!" yes:@"" no:@""];
+             [Common_modules alert_show:self title:@"" message:@"기존 아이디!" yes:@"" no:@""];
             return true;
         }
     
@@ -101,7 +101,7 @@
             }
             NSLog(@"Changing user : %@", _myinfo);
             
-            [Common_Module alert_show:@"" message:@"아이디 변경!" yes:@"" no:@""];
+            [Common_modules alert_show:self title:@"" message:@"아이디 변경!" yes:@"" no:@""];
             
             return true;
             
@@ -121,7 +121,7 @@
     [self saveData:MyData];
         
         
-    [Common_Module alert_show:@"" message:@"새로운 로그인!" yes:@"" no:@""];
+    [Common_modules alert_show:self title:@"" message:@"새로운 로그인!" yes:@"" no:@""];
     
     return false;
     }
