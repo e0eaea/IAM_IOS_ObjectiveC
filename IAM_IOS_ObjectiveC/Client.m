@@ -6,17 +6,27 @@
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
-#import "Client.h"
 
+#import "Client.h"
 
 @implementation Client
 
-
--(void)init:(NSString *)id
+//서버에 정보요청!
++ (void) request_brief_info:(NSString *)id
 {
-    _id=id;
-
+    NSArray *dictionKeys = @[@"id"];
+    NSArray *dictionVals = @[id];
+    NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+    
+    
+    NSString *userJsonData = [Common_Module transToJson:client_data];
+    
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:brief_info];
+    
 }
+
+
+
 
 
 @end

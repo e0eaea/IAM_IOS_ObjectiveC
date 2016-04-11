@@ -66,6 +66,7 @@
     if (self.advertisingSwitch.on) {
         // All we advertise is our service's UUID
         
+        
         [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:_uuid_text.text]], CBAdvertisementDataLocalNameKey:_name_text.text }];
     }
     

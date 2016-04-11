@@ -1,18 +1,18 @@
 //
-//  MenuViewController.m
+//  MainViewController.m
 //  IAM_IOS_ObjectiveC
 //
-//  Created by KMK on 2016. 4. 2..
+//  Created by KMK on 2016. 4. 9..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
-#import "MenuViewController.h"
+#import "MainViewController.h"
 
-@interface MenuViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation MenuViewController
+@implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

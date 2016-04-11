@@ -8,7 +8,11 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
+
+@property(strong,nonatomic) MyInfo * myinfo;
+
 
 @end
 
@@ -17,6 +21,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
+    UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+    
+    [_window setRootViewController:viewController];
+    
     return YES;
 }
 
@@ -123,5 +135,102 @@
         }
     }
 }
+
+
+- (UIWindow*)get_window{
+    
+    return _window;
+    
+}
+
+
+- (MyInfo *)getMyInfo {
+    
+    NSString *TLF = [[NSUserDefaults standardUserDefaults] valueForKey:@"TLF"];
+    if(TLF == nil)
+        return nil;
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyInfo" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *info in fetchedObjects)
+    {
+        if([[info valueForKey:@"userID"] isEqualToString:TLF]) {
+            
+            NSLog(@"Already erolled user : %@", info);
+            return (MyInfo *)info;
+        }
+    }
+    
+    NSLog(@"UsersInfo invalid.");
+    return nil;
+}
+
+
+- (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString {
+    
+    NSLog(@"ConnectToServer With Json, URL");
+    //Formatting the URL
+    //NSString *urlAsString = kSend;
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    //Structuring the URL request
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //[urlRequest setValue:[NSString stringWithFormat:@"Basic %@",authValue] forHTTPHeaderField:@"Authorization"];
+    
+    //    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+    
+   
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:urlRequest
+                                    completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError) {
+  
+       NSLog(@"받아옴!");
+   
+                                       
+                                        
+        if ([data length] > 0 && connectionError == nil) {
+            
+        
+            NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+            
+            //NSLog(@"diction : %@", diction);
+            // NSString *method = [diction valueForKey:@"type"];
+            
+            
+            
+            if (connectionError !=nil){
+                
+                NSLog(@"Error happened = %@",connectionError);
+                
+            }
+            
+            if([urlString isEqualToString:brief_info])
+            {
+                
+                [_search_delegate response_brief_info:diction];
+                
+            }
+            
+            
+            
+        }
+        
+    }]resume];
+        
+}
+
+
+
+
 
 @end
