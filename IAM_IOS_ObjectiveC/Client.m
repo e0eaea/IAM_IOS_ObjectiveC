@@ -26,6 +26,21 @@
 }
 
 
+//서버에 자세한요청!
++ (void) request_more_info:(NSString *)id
+{
+    NSArray *dictionKeys = @[@"id"];
+    NSArray *dictionVals = @[id];
+    NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+    
+    
+    NSString *userJsonData = [Common_modules transToJson:client_data];
+    
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:more_info];
+    
+    
+}
+
 
 
 

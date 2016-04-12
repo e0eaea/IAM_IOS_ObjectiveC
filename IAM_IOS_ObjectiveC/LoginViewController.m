@@ -72,11 +72,12 @@
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
+    if([fetchedObjects count]!=0)
+    {
     
     NSManagedObject *info= [fetchedObjects objectAtIndex:0];
     
-    if(![info isEqual:NULL])
-    {
+   
         //기존 아이디
         if([[info valueForKey:@"id"] isEqualToString:id]) {
             NSLog(@"Already erolled user : %@", info);

@@ -87,7 +87,7 @@
 
 - (void)startTimedTask
 {
-    NSTimer *fiveSecondTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(performBackgroundTask) userInfo:nil repeats:YES];
+   // NSTimer *fiveSecondTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(performBackgroundTask) userInfo:nil repeats:YES];
 }
 
 - (void)performBackgroundTask

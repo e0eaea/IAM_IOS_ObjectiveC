@@ -10,5 +10,6 @@
 #define server_address_h
 
 #define brief_info @"http://52.69.46.152:8000/api/find_members/random"
+#define more_info @"http://52.69.46.152:8000/api/find_members/card"
 
 #endif /* server_address_h */

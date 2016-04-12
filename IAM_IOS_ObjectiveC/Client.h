@@ -20,5 +20,6 @@
 
 + (void) request_brief_info:(NSString *)id;
 
++ (void) request_more_info:(NSString *)id;
 
 @end

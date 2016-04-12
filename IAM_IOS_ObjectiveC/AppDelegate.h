@@ -11,6 +11,8 @@
 #import "MyInfo.h"
 #import "Server_address.h"
 #import "SearchDelegate.h"
+#import "UIColor+Helper.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="129" id="KGk-i7-Jjw" customClass="SearchCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" focusStyle="custom" rowHeight="129" id="KGk-i7-Jjw" customClass="SearchCell">
             <rect key="frame" x="0.0" y="0.0" width="399" height="129"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -22,13 +22,13 @@
                                 <rect key="frame" x="8" y="0.0" width="383" height="129"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfo-yQ-9Bm" userLabel="name_label">
-                                <rect key="frame" x="146" y="29" width="164.5" height="35"/>
+                                <rect key="frame" x="149" y="17" width="164.5" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Qfo-yQ-9Bm" secondAttribute="height" multiplier="164:35" id="09B-rK-7n5"/>
                                     <constraint firstAttribute="width" constant="164.5" id="OlA-Zf-Ybt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4H2-4z-0jC" userLabel="like_button">
@@ -41,7 +41,7 @@
                                 <state key="normal" backgroundImage="star.png"/>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L9j-vc-yS9">
-                                <rect key="frame" x="34" y="29" width="80" height="80"/>
+                                <rect key="frame" x="25" y="17" width="92" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="L9j-vc-yS9" secondAttribute="height" multiplier="1:1" id="5xu-9r-TNl"/>
                                 </constraints>
@@ -51,10 +51,10 @@
                         <constraints>
                             <constraint firstItem="Vhy-lS-Pw7" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" id="0Uw-HQ-LNs"/>
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="top" secondItem="L9j-vc-yS9" secondAttribute="top" id="0Vi-fH-5Nt"/>
-                            <constraint firstItem="L9j-vc-yS9" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="34" id="1m6-TO-ipg"/>
+                            <constraint firstItem="L9j-vc-yS9" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="25" id="1m6-TO-ipg"/>
                             <constraint firstAttribute="bottom" secondItem="L9j-vc-yS9" secondAttribute="bottom" constant="20" id="1zz-iO-ogs"/>
                             <constraint firstAttribute="bottom" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" id="ALT-fa-Zj5"/>
-                            <constraint firstItem="L9j-vc-yS9" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="29" id="JBM-FC-awb"/>
+                            <constraint firstItem="L9j-vc-yS9" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="17" id="JBM-FC-awb"/>
                             <constraint firstAttribute="trailing" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" constant="8" id="XI6-Sa-ev1"/>
                             <constraint firstItem="4H2-4z-0jC" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="29" id="aS1-ST-6ud"/>
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="leading" secondItem="L9j-vc-yS9" secondAttribute="trailing" constant="32" id="e03-au-5aL"/>

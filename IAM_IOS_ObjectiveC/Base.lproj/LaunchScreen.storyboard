@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Hf-z6-ITU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash2.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Hf-z6-ITU">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="681"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9Hf-z6-ITU" secondAttribute="height" multiplier="375:667" id="fN5-fL-Lz6"/>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash.png" width="1080" height="1920"/>
+        <image name="splash2.png" width="1080" height="1920"/>
     </resources>
 </document>

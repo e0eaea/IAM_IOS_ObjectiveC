@@ -48,13 +48,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcQ-Sv-aBz" userLabel="white_label">
                                 <rect key="frame" x="-4" y="64" width="383" height="63.5"/>
                                 <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zym-gi-9X2" userLabel="random_button">
+                                        <rect key="frame" x="191" y="0.0" width="191.5" height="61"/>
+                                        <state key="normal" backgroundImage="random_selected.png"/>
+                                        <connections>
+                                            <action selector="favorite_random_button:" destination="qZu-eE-xYx" eventType="touchUpInside" id="MpQ-8s-0FA"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vc-ke-5yJ" userLabel="favorite_button">
                                         <rect key="frame" x="0.0" y="0.0" width="192" height="61.5"/>
-                                        <state key="normal" backgroundImage="관심사검색_selected.png"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zym-gi-9X2" userLabel="random_button">
-                                        <rect key="frame" x="191" y="0.0" width="191.5" height="61"/>
-                                        <state key="normal" backgroundImage="무작위주변검색.png"/>
+                                        <state key="normal" backgroundImage="favorite_white.png"/>
+                                        <connections>
+                                            <action selector="favorite_random_button:" destination="qZu-eE-xYx" eventType="touchUpInside" id="E2d-l1-2Ce"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,7 +77,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5w-uH-h2A">
-                                <rect key="frame" x="-4" y="127.5" width="383" height="490.5"/>
+                                <rect key="frame" x="-4" y="127" width="383" height="490.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -103,6 +109,8 @@
                     <navigationItem key="navigationItem" title="Greet" id="MsY-Bn-rYu"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="favorite_button" destination="3vc-ke-5yJ" id="Dqd-vh-dOb"/>
+                        <outlet property="random_button" destination="Zym-gi-9X2" id="DnK-dE-PJC"/>
                         <outlet property="tableView" destination="G5w-uH-h2A" id="MWu-f7-hRX"/>
                     </connections>
                 </viewController>
@@ -119,7 +127,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4RD-an-eak">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="qZu-eE-xYx" kind="relationship" relationship="rootViewController" id="stx-4a-tgk"/>
@@ -132,7 +144,7 @@
     </scenes>
     <resources>
         <image name="bg_grey.png" width="1080" height="1491"/>
-        <image name="관심사검색_selected.png" width="540" height="170"/>
-        <image name="무작위주변검색.png" width="540" height="170"/>
+        <image name="favorite_white.png" width="540" height="170"/>
+        <image name="random_selected.png" width="540" height="170"/>
     </resources>
 </document>

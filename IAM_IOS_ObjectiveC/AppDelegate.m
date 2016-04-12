@@ -203,7 +203,7 @@
             NSError *error;
             NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
             
-            //NSLog(@"diction : %@", diction);
+           //NSLog(@"diction : %@", diction);
             // NSString *method = [diction valueForKey:@"type"];
             
             
@@ -215,12 +215,12 @@
             }
             
             if([urlString isEqualToString:brief_info])
-            {
-                
                 [_search_delegate response_brief_info:diction];
                 
-            }
             
+            else if([urlString isEqualToString:more_info])
+               [[NSNotificationCenter defaultCenter] postNotificationName:@"more_info"
+                                                                object:nil userInfo:diction];
             
             
         }

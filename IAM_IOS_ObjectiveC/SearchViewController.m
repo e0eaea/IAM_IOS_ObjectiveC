@@ -9,6 +9,7 @@
 #import "UUID_Define.h"
 
 #import "SearchViewController.h"
+#import "Detail_Card_ViewController.h"
 #import "SearchCell.h"
 #import "NSData+Base64.h"
 #import "SearchDelegate.h"
@@ -19,6 +20,9 @@
 
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) IBOutlet UIButton *favorite_button;
+@property (strong, nonatomic) IBOutlet UIButton *random_button;
 
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
@@ -47,10 +51,29 @@
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.search_delegate=(id)self;
-    
+   UINavigationBar * navibar =self.navigationController.navigationBar;
+    navibar.barTintColor=[UIColor colorWithRGBA:0x01afffff];
 
 }
 
+- (IBAction)favorite_random_button:(id)sender {
+    
+   int tag = (int)[sender tag];
+    
+    if(tag==0)
+    {
+         [_favorite_button setBackgroundImage:[UIImage imageNamed:@"favorite_selected.png" ] forState:UIControlStateNormal];
+          [_random_button setBackgroundImage:[UIImage imageNamed:@"random_white.png" ] forState:UIControlStateNormal];
+    
+    }
+    
+    else{
+        [_favorite_button setBackgroundImage:[UIImage imageNamed:@"favorite_white.png" ] forState:UIControlStateNormal];
+        [_random_button setBackgroundImage:[UIImage imageNamed:@"random_selected.png" ] forState:UIControlStateNormal];
+    }
+    
+    
+}
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
@@ -103,21 +126,21 @@
     NSString *bluetooth_id=[advertisementData objectForKey:@"kCBAdvDataLocalName"];
     // NSString *uuid=[advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"][0];
     
-    if(!bluetooth_id) bluetooth_id=@"이름없음";
+    if(!bluetooth_id) bluetooth_id=@"team";
     //if(!uuid) uuid=@"UUID없음";
     
    // NSLog(@"\n블루투스를 통해 받은 정보 %@", advertisementData);
     
-    
+    /*
     if(_num <5) { NSLog(@"값이 뭔데? %d",_num); _num++;   }
     else { flag=false;   }
+    */
     
-    /*
     for(NSString* request_id in _request_ids)
         if([request_id isEqualToString:bluetooth_id])
           { flag=false; break;}
 
-    */
+    
     if(flag)
     {
         [_request_ids addObject:bluetooth_id];
@@ -145,6 +168,7 @@
 {
     
     Client *new_client=[[Client alloc]init];
+    new_client.id=[info objectForKey:@"id"];
     new_client.name=[info objectForKey:@"nickname"];
     new_client.base64_image=[NSData dataFromBase64String:[info objectForKey:@"profile_picture"]];
     
@@ -227,7 +251,20 @@
 }
 
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"셀클릭");
+    
+    Client *c=(Client *)_tableData[indexPath.row];
+    
+    
+    Detail_Card_ViewController *detail=[[Detail_Card_ViewController alloc]init_with_client_info:c];
+    
+    
+    [self.navigationController pushViewController:detail animated:YES];
+  
+    
+}
 
 
 
