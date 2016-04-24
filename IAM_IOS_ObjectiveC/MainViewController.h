@@ -6,6 +6,7 @@
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import <UIKit/UIKit.h>
 
 @interface MainViewController : UITabBarController

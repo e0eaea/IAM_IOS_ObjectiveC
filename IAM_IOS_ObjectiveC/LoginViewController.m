@@ -8,13 +8,11 @@
 
 #import "LoginViewController.h"
 #import <sys/utsname.h>
-#import "Common_Modules.h"
 #import "MainViewController.h"
 
 @interface LoginViewController ()
 
-@property (strong, nonatomic) IBOutlet UIButton *next_button;
-@property (strong, nonatomic) IBOutlet UITextField *name_field;
+@property (strong, nonatomic) IBOutlet UIButton *kakao_button;
 @property(strong, nonatomic) MyInfo * myinfo;
 @property(strong,nonatomic) UIWindow * window;
 
@@ -28,11 +26,12 @@
     
     _managedObjectContext = [[[UIApplication sharedApplication] delegate] performSelector:@selector(managedObjectContext)];
     
+
     _window=[[[UIApplication sharedApplication] delegate]window];
 
     
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -40,94 +39,122 @@
 }
 
 - (IBAction)next_click:(id)sender {
+   
     
-    if([_name_field.text isEqualToString:@""])
+    [[KOSession sharedSession] close];
+    
+    [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
+        
+        if ([[KOSession sharedSession] isOpen]) {
+            // login success.
+            NSLog(@"login success.");
+          
+                    [KOSessionTask meTaskWithCompletionHandler:^(KOUser* result, NSError* error){
+                        
+                        if (result) {
+                            NSLog(@"카카오톡 프로필 가져오기 성공 %@",result);
+                            
+                            NSArray *dictionKeys = @[@"type", @"id",@"nickname"];
+                            NSArray *dictionVals = @[@"login",
+                                                     result.ID.stringValue, [result propertyForKey:@"nickname"]];
+                            
+                            NSDictionary *kakaoData = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+                            
+                            [self check_login:kakaoData];
+                            
+                        }
+                        else
+                            NSLog(@"카카오톡 프로필 가져오기 실패 %@", error);
+
+                }];
+        }}];
+    
+}
+
+
+
+- (void) check_login:(NSDictionary *)data
+{
+    MyInfo *myinfo=[[[UIApplication sharedApplication] delegate] performSelector:@selector(getMyInfo)];
+    NSString *message=@"";
+    
+    //최초로그인
+    if([myinfo isKindOfClass:NULL])
     {
-        [Common_modules alert_show:self title:@"" message:@"이름을 입력하시오" yes:@"" no:@""];
-    }
-    //아이디가 있는 것인지 데이터베이스,서버에서 확인
-    else{
+        message=@"로그인 성공";
+        NSLog(@"로그인1");
         
-        [self load_user_info:_name_field.text];
         
+        [[[UIApplication sharedApplication] delegate] performSelector:@selector(saveData:) withObject:data];
+
     
-        
         UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+        
         [_window setRootViewController:viewController];
-
-
-        
-    
-    }
-    
-}
-
-//데이터베이스에 유저정보 있나 확인!  (회원가입생기면 변경해야할 부분!!!!)
-- (BOOL) load_user_info:(NSString*)id {
-    
-    NSError *error;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyInfo" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    if([fetchedObjects count]!=0)
-    {
-    
-    NSManagedObject *info= [fetchedObjects objectAtIndex:0];
-    
-   
-        //기존 아이디
-        if([[info valueForKey:@"id"] isEqualToString:id]) {
-            NSLog(@"Already erolled user : %@", info);
-            _myinfo = (MyInfo *)info;
-            
-             [Common_modules alert_show:self title:@"" message:@"기존 아이디!" yes:@"" no:@""];
-            return true;
-        }
-    
-        //기존 아이디가 아니다.
-        else{
-            
-            _myinfo = (MyInfo *)info;
-            _myinfo.id=id;
-            
-            NSError *error;
-            
-            // here's where the actual save happens, and if it doesn't we print something out to the console
-            if (![_managedObjectContext save:&error])
-            {
-                NSLog(@"Problem saving: %@", [error localizedDescription]);
-            }
-            NSLog(@"Changing user : %@", _myinfo);
-            
-            [Common_modules alert_show:self title:@"" message:@"아이디 변경!" yes:@"" no:@""];
-            
-            return true;
-            
-            }
         
     }
     
-    
-    //기존에 아무것도 없는 경우
     else{
-    
-        
-    NSArray *dictionKeys = @[@"type", @"id"];
-    NSArray *dictionVals = @[@"login", id ];
-    NSDictionary *MyData = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
-    
-    [self saveData:MyData];
-        
-        
-    [Common_modules alert_show:self title:@"" message:@"새로운 로그인!" yes:@"" no:@""];
-    
-    return false;
+        //기존접속이 아닌경우
+        if(myinfo.id!=[data valueForKey:@"id"])
+        {
+            message=@"로그인 성공2";
+            NSLog(@"로그인2");
+            
+            
+            UIAlertController * alert=   [UIAlertController
+                                          alertControllerWithTitle:@"새로운 로그인"
+                                          message:@"기존의 사용자정보는 사라집니다."
+                                          preferredStyle:UIAlertControllerStyleAlert];
+            
+            
+            UIAlertAction* yesButton = [UIAlertAction
+                                        actionWithTitle:@"네"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action)
+                                        {
+                                            //Handel your yes please button action here
+                                             [[[UIApplication sharedApplication] delegate] performSelector:@selector(saveData:) withObject:data];
+                                            
+                                            
+                                            UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                                            UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+                                            
+                                            [_window setRootViewController:viewController];
+                                            
+                                            
+                                        }];
+            
+            [alert addAction:yesButton];
+            
+            
+            UIAlertAction* noButton = [UIAlertAction
+                                       actionWithTitle:@"아니오"
+                                       style:UIAlertActionStyleDefault
+                                       handler:^(UIAlertAction * action)
+                                       {
+                                           //Handel no, thanks button
+                                           
+                                           
+                                           UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
+                                           UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+                                           
+                                           [_window setRootViewController:viewController];
+                                           
+                                       }];
+            
+            
+            [alert addAction:noButton];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
-    
+
 }
+
+
+
 
 
 //키보드 내리기
@@ -135,30 +162,9 @@
     
     // UITouch *touch = [[event allTouches] anyObject];
     
-    [_name_field resignFirstResponder];
+   // [_name_field resignFirstResponder];
     
 }
-
-
-
-- (void) saveData:(NSDictionary *)data {     //UserInfo Save
-    
-    _myinfo = (MyInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"MyInfo" inManagedObjectContext:_managedObjectContext];
-    _myinfo.id=[data valueForKey:@"id"];
-    
-    
-    NSError *error;
-    
-    // here's where the actual save happens, and if it doesn't we print something out to the console
-    if (![_managedObjectContext save:&error])
-    {
-        NSLog(@"Problem saving: %@", [error localizedDescription]);
-    }
-    NSLog(@"New User : %@", _myinfo);
-    
-    
-}
-
 
 
 

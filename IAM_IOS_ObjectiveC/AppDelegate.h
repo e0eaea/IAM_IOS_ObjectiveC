@@ -12,6 +12,8 @@
 #import "Server_address.h"
 #import "SearchDelegate.h"
 #import "UIColor+Helper.h"
+#import "Common_modules.h"
+
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -28,7 +30,10 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString;
-
+- (void) check_login:(NSDictionary *)data;
+- (void) logout;
+- (MyInfo *)getMyInfo;
+- (void) saveData:(NSDictionary *)data ;
 
 @end
 

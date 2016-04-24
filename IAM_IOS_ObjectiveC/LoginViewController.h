@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import "AppDelegate.h"
 #import "MyInfo.h"
 

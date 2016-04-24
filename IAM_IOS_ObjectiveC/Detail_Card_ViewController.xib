@@ -17,12 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="HED-nM-y8m">
-                    <rect key="frame" x="31" y="110" width="313" height="313"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="HED-nM-y8m" secondAttribute="height" multiplier="1:1" id="fiT-x6-srH"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogE-J2-PYu" userLabel="card_name">
                     <rect key="frame" x="120" y="475" width="135" height="39"/>
                     <constraints>
@@ -36,6 +30,12 @@
                     <rect key="frame" x="120" y="506" width="135" height="8"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="0sa-kJ-Qib" secondAttribute="height" multiplier="135:8" id="b7d-4V-dVl"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="HED-nM-y8m">
+                    <rect key="frame" x="31" y="110" width="313" height="313"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="HED-nM-y8m" secondAttribute="height" multiplier="1:1" id="fiT-x6-srH"/>
                     </constraints>
                 </imageView>
             </subviews>

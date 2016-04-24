@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Client.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 
 @interface SearchViewController : UIViewController
-
-
-
-
 
 @end

@@ -2,7 +2,7 @@
 //  MyInfo+CoreDataProperties.m
 //  IAM_IOS_ObjectiveC
 //
-//  Created by KMK on 2016. 4. 9..
+//  Created by KMK on 2016. 4. 24..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,6 +14,7 @@
 @implementation MyInfo (CoreDataProperties)
 
 @dynamic id;
-@dynamic profile_image;
+@dynamic nickname;
+@dynamic mycards;
 
 @end

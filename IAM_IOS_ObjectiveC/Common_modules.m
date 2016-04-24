@@ -33,7 +33,7 @@
 }
 
 
-+ (void) alert_show:(UIViewController*)view title:(NSString*)title message:(NSString*)message yes:(NSString*)yes no:(NSString*)no
++ (UIAlertController*) alert_show:(NSString*)title message:(NSString*)message yes:(NSString*)yes no:(NSString*)no
 {
     
     UIAlertController * alert=   [UIAlertController
@@ -78,9 +78,7 @@
            [alert addAction:noButton];
        }
     
-       
-       [view presentViewController:alert animated:YES completion:nil];
-       
+    return alert;
 }
        
 

@@ -13,7 +13,5 @@
 
 +(NSString*)transToJson:(NSDictionary*) userData;
 
-+ (void) alert_show:(UIViewController*)view title:(NSString*)title
-            message:(NSString*)message yes:(NSString*)yes no:(NSString*)no;
-
++ (UIAlertController*) alert_show:(NSString*)title message:(NSString*)message yes:(NSString*)yes no:(NSString*)no;
 @end

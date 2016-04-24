@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3083F741CCB3F5200F87EC3 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3083F731CCB3F5200F87EC3 /* KakaoOpenSDK.framework */; };
+		A3083F761CCB494F00F87EC3 /* KakaoLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = A3083F751CCB494F00F87EC3 /* KakaoLogin.png */; };
+		A3083F881CCCF94E00F87EC3 /* Card+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3083F811CCCF94E00F87EC3 /* Card+CoreDataProperties.m */; };
+		A3083F891CCCF94E00F87EC3 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = A3083F831CCCF94E00F87EC3 /* Card.m */; };
+		A3083F901CCD092100F87EC3 /* MyInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3083F8D1CCD092100F87EC3 /* MyInfo+CoreDataProperties.m */; };
+		A3083F911CCD092100F87EC3 /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A3083F8F1CCD092100F87EC3 /* MyInfo.m */; };
 		A35511861CBB83CF00536FCD /* Common_modules.m in Sources */ = {isa = PBXBuildFile; fileRef = A35511851CBB83CF00536FCD /* Common_modules.m */; };
 		A355118A1CBB879E00536FCD /* bg_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = A35511871CBB879E00536FCD /* bg_grey.png */; };
 		A355118B1CBB879E00536FCD /* login-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = A35511881CBB879E00536FCD /* login-bg.png */; };
@@ -17,6 +23,7 @@
 		A35511961CBB8BFF00536FCD /* image_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = A35511951CBB8BFF00536FCD /* image_empty.png */; };
 		A355119A1CBBBB2400536FCD /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A35511991CBBBB2400536FCD /* UIColor+Helper.m */; };
 		A355119C1CBBBCEF00536FCD /* splash2.png in Resources */ = {isa = PBXBuildFile; fileRef = A355119B1CBBBCEF00536FCD /* splash2.png */; };
+		A35511A01CBCA7D400536FCD /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A355119F1CBCA7D400536FCD /* MyPageViewController.m */; };
 		A3B128791CAFB6E2005FBCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B128781CAFB6E2005FBCB9 /* main.m */; };
 		A3B1287C1CAFB6E2005FBCB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B1287B1CAFB6E2005FBCB9 /* AppDelegate.m */; };
 		A3B128851CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3B128831CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC.xcdatamodeld */; };
@@ -42,8 +49,6 @@
 		A3B1294C1CB66354005FBCB9 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B129471CB66354005FBCB9 /* next.png */; };
 		A3B1294D1CB66354005FBCB9 /* password_lost.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B129481CB66354005FBCB9 /* password_lost.png */; };
 		A3B1294E1CB66354005FBCB9 /* sign_up.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B129491CB66354005FBCB9 /* sign_up.png */; };
-		A3DC60F51CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DC60F21CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.m */; };
-		A3DC60F61CB8CDCD00651CC8 /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DC60F41CB8CDCD00651CC8 /* MyInfo.m */; };
 		A3DC61051CB8DA3700651CC8 /* favorite_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DC60FB1CB8DA3700651CC8 /* favorite_selected.png */; };
 		A3DC61061CB8DA3700651CC8 /* favorite_white.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DC60FC1CB8DA3700651CC8 /* favorite_white.png */; };
 		A3DC61071CB8DA3700651CC8 /* random_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DC60FD1CB8DA3700651CC8 /* random_selected.png */; };
@@ -77,6 +82,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A3083F731CCB3F5200F87EC3 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
+		A3083F751CCB494F00F87EC3 /* KakaoLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KakaoLogin.png; sourceTree = "<group>"; };
+		A3083F801CCCF94E00F87EC3 /* Card+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Card+CoreDataProperties.h"; path = "../Card+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A3083F811CCCF94E00F87EC3 /* Card+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Card+CoreDataProperties.m"; path = "../Card+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A3083F821CCCF94E00F87EC3 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Card.h; path = ../Card.h; sourceTree = "<group>"; };
+		A3083F831CCCF94E00F87EC3 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Card.m; path = ../Card.m; sourceTree = "<group>"; };
+		A3083F8C1CCD092100F87EC3 /* MyInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MyInfo+CoreDataProperties.h"; path = "../MyInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A3083F8D1CCD092100F87EC3 /* MyInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MyInfo+CoreDataProperties.m"; path = "../MyInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A3083F8E1CCD092100F87EC3 /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyInfo.h; path = ../MyInfo.h; sourceTree = "<group>"; };
+		A3083F8F1CCD092100F87EC3 /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyInfo.m; path = ../MyInfo.m; sourceTree = "<group>"; };
 		A35511841CBB83CF00536FCD /* Common_modules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common_modules.h; sourceTree = "<group>"; };
 		A35511851CBB83CF00536FCD /* Common_modules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common_modules.m; sourceTree = "<group>"; };
 		A35511871CBB879E00536FCD /* bg_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_grey.png; sourceTree = "<group>"; };
@@ -91,6 +106,8 @@
 		A35511981CBBBB2400536FCD /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
 		A35511991CBBBB2400536FCD /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
 		A355119B1CBBBCEF00536FCD /* splash2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash2.png; sourceTree = "<group>"; };
+		A355119E1CBCA7D400536FCD /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
+		A355119F1CBCA7D400536FCD /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
 		A3B128741CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAM_IOS_ObjectiveC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B128781CAFB6E2005FBCB9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A3B1287A1CAFB6E2005FBCB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -133,10 +150,6 @@
 		A3B129471CB66354005FBCB9 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
 		A3B129481CB66354005FBCB9 /* password_lost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password_lost.png; sourceTree = "<group>"; };
 		A3B129491CB66354005FBCB9 /* sign_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sign_up.png; sourceTree = "<group>"; };
-		A3DC60F11CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MyInfo+CoreDataProperties.h"; path = "../MyInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A3DC60F21CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MyInfo+CoreDataProperties.m"; path = "../MyInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A3DC60F31CB8CDCD00651CC8 /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyInfo.h; path = ../MyInfo.h; sourceTree = "<group>"; };
-		A3DC60F41CB8CDCD00651CC8 /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyInfo.m; path = ../MyInfo.m; sourceTree = "<group>"; };
 		A3DC60FB1CB8DA3700651CC8 /* favorite_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_selected.png; sourceTree = "<group>"; };
 		A3DC60FC1CB8DA3700651CC8 /* favorite_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite_white.png; sourceTree = "<group>"; };
 		A3DC60FD1CB8DA3700651CC8 /* random_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = random_selected.png; sourceTree = "<group>"; };
@@ -167,6 +180,7 @@
 				A3B128BC1CB01E96005FBCB9 /* Foundation.framework in Frameworks */,
 				A3B128BA1CB01E8F005FBCB9 /* UIKit.framework in Frameworks */,
 				A3B128AE1CAFB886005FBCB9 /* CoreBluetooth.framework in Frameworks */,
+				A3083F741CCB3F5200F87EC3 /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,10 +210,18 @@
 			name = Card;
 			sourceTree = "<group>";
 		};
+		A355119D1CBCA76F00536FCD /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				A355119E1CBCA7D400536FCD /* MyPageViewController.h */,
+				A355119F1CBCA7D400536FCD /* MyPageViewController.m */,
+			);
+			name = MyPage;
+			sourceTree = "<group>";
+		};
 		A3B1286B1CAFB6E2005FBCB9 = {
 			isa = PBXGroup;
 			children = (
-				A3DC61351CB946D400651CC8 /* CFNetwork.framework */,
 				A3DC60F01CB8C97400651CC8 /* CoreData */,
 				A3B129511CB66374005FBCB9 /* ImageSource */,
 				A3B128761CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC */,
@@ -228,6 +250,7 @@
 				A3B128F81CB4B5CB005FBCB9 /* Main_tab */,
 				A3DC61151CB8DB6400651CC8 /* Search */,
 				A3B128F71CB4B5C7005FBCB9 /* Card */,
+				A355119D1CBCA76F00536FCD /* MyPage */,
 				A3B128FC1CB4B652005FBCB9 /* Peripheral */,
 				A3B128FB1CB4B643005FBCB9 /* Central */,
 				A3B128771CAFB6E2005FBCB9 /* Supporting Files */,
@@ -335,6 +358,8 @@
 		A3B128FE1CB4B709005FBCB9 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				A3083F731CCB3F5200F87EC3 /* KakaoOpenSDK.framework */,
+				A3DC61351CB946D400651CC8 /* CFNetwork.framework */,
 				A3B128AD1CAFB886005FBCB9 /* CoreBluetooth.framework */,
 				A3B128BD1CB01E9C005FBCB9 /* CoreGraphics.framework */,
 				A3B128BB1CB01E96005FBCB9 /* Foundation.framework */,
@@ -363,6 +388,7 @@
 		A3B129501CB66365005FBCB9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A3083F751CCB494F00F87EC3 /* KakaoLogin.png */,
 				A35511881CBB879E00536FCD /* login-bg.png */,
 				A3B129461CB66354005FBCB9 /* name_field.png */,
 				A3B129471CB66354005FBCB9 /* next.png */,
@@ -387,10 +413,14 @@
 		A3DC60F01CB8C97400651CC8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A3DC60F11CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.h */,
-				A3DC60F21CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.m */,
-				A3DC60F31CB8CDCD00651CC8 /* MyInfo.h */,
-				A3DC60F41CB8CDCD00651CC8 /* MyInfo.m */,
+				A3083F8C1CCD092100F87EC3 /* MyInfo+CoreDataProperties.h */,
+				A3083F8D1CCD092100F87EC3 /* MyInfo+CoreDataProperties.m */,
+				A3083F8E1CCD092100F87EC3 /* MyInfo.h */,
+				A3083F8F1CCD092100F87EC3 /* MyInfo.m */,
+				A3083F801CCCF94E00F87EC3 /* Card+CoreDataProperties.h */,
+				A3083F811CCCF94E00F87EC3 /* Card+CoreDataProperties.m */,
+				A3083F821CCCF94E00F87EC3 /* Card.h */,
+				A3083F831CCCF94E00F87EC3 /* Card.m */,
 			);
 			name = CoreData;
 			path = IAM_IOS_ObjectiveC;
@@ -600,6 +630,7 @@
 				A3B1294C1CB66354005FBCB9 /* next.png in Resources */,
 				A3DC611C1CB8E43200651CC8 /* SearchCell.xib in Resources */,
 				A3DC610E1CB8DA3700651CC8 /* star.png in Resources */,
+				A3083F761CCB494F00F87EC3 /* KakaoLogin.png in Resources */,
 				A355118C1CBB879E00536FCD /* card_shadow.png in Resources */,
 				A355119C1CBBBCEF00536FCD /* splash2.png in Resources */,
 				A3B128F21CB29315005FBCB9 /* SearchTableViewCell.xib in Resources */,
@@ -638,6 +669,7 @@
 				A3DC61111CB8DADB00651CC8 /* MainViewController.m in Sources */,
 				A3B128F61CB296B5005FBCB9 /* Brief_profile.m in Sources */,
 				A3DC611B1CB8E43200651CC8 /* SearchCell.m in Sources */,
+				A3083F911CCD092100F87EC3 /* MyInfo.m in Sources */,
 				A35511901CBB8A9D00536FCD /* Detail_Card_ViewController.m in Sources */,
 				A35511861CBB83CF00536FCD /* Common_modules.m in Sources */,
 				A355119A1CBBBB2400536FCD /* UIColor+Helper.m in Sources */,
@@ -646,9 +678,11 @@
 				A3DC61141CB8DB5B00651CC8 /* SearchViewController.m in Sources */,
 				A3B128B11CB007DC005FBCB9 /* CentralViewController.m in Sources */,
 				A3B128B41CB007EF005FBCB9 /* PeripheralViewController.m in Sources */,
-				A3DC60F51CB8CDCD00651CC8 /* MyInfo+CoreDataProperties.m in Sources */,
 				A3B128EA1CB14528005FBCB9 /* NSData+Base64.m in Sources */,
-				A3DC60F61CB8CDCD00651CC8 /* MyInfo.m in Sources */,
+				A35511A01CBCA7D400536FCD /* MyPageViewController.m in Sources */,
+				A3083F891CCCF94E00F87EC3 /* Card.m in Sources */,
+				A3083F901CCD092100F87EC3 /* MyInfo+CoreDataProperties.m in Sources */,
+				A3083F881CCCF94E00F87EC3 /* Card+CoreDataProperties.m in Sources */,
 				A3B128791CAFB6E2005FBCB9 /* main.m in Sources */,
 				A3B128E71CB141B4005FBCB9 /* Client.m in Sources */,
 				A3B128F11CB29315005FBCB9 /* SearchTableViewCell.m in Sources */,
@@ -788,9 +822,14 @@
 				CODE_SIGN_ENTITLEMENTS = IAM_IOS_ObjectiveC/IAM_IOS_ObjectiveC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = IAM_IOS_ObjectiveC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = Minkyu.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -808,9 +847,14 @@
 				CODE_SIGN_ENTITLEMENTS = IAM_IOS_ObjectiveC/IAM_IOS_ObjectiveC.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = IAM_IOS_ObjectiveC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = Minkyu.IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

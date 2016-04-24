@@ -6,7 +6,9 @@
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 #import "AppDelegate.h"
+
 
 
 @interface AppDelegate ()
@@ -23,11 +25,30 @@
     // Override point for customization after application launch.
     
      _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+   
+    UIViewController* viewController;
+
     
-    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
-    UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+    KOSession *session = [KOSession sharedSession];
     
-    [_window setRootViewController:viewController];
+    if([session isOpen])
+    {
+        NSLog(@"이미 열려있음!!");
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+        
+        
+    }
+    else
+    {
+        
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
+        viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+        
+    }
+    
+     [_window setRootViewController:viewController];
+    
     
     return YES;
 }
@@ -35,11 +56,13 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -48,12 +71,23 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    /*
+    if([[KOSession sharedSession] isOpen]) {
+        
+        NSLog(@"KOSession is alived.");
+        [KOSession handleDidBecomeActive];
+    }
+
+     */
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+    
+    
+  [self saveContext];
+    
 }
 
 #pragma mark - Core Data stack
@@ -146,27 +180,50 @@
 
 - (MyInfo *)getMyInfo {
     
-    NSString *TLF = [[NSUserDefaults standardUserDefaults] valueForKey:@"TLF"];
-    if(TLF == nil)
-        return nil;
+    NSLog(@"here");
+    
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyInfo" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    for (NSManagedObject *info in fetchedObjects)
-    {
-        if([[info valueForKey:@"userID"] isEqualToString:TLF]) {
-            
-            NSLog(@"Already erolled user : %@", info);
-            return (MyInfo *)info;
-        }
-    }
+    MyInfo *myinfo=[fetchedObjects objectAtIndex:0];
     
-    NSLog(@"UsersInfo invalid.");
-    return nil;
+    return myinfo;
 }
+
+- (void) saveData:(NSDictionary *)data {     //UserInfo Save
+    
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyInfo" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if([fetchedObjects count]==0)
+        _myinfo = (MyInfo *)[NSEntityDescription insertNewObjectForEntityForName:@"MyInfo" inManagedObjectContext:_managedObjectContext];
+    
+    else
+        _myinfo=(MyInfo*)[fetchedObjects objectAtIndex:0];
+    
+    
+    _myinfo.id=[data valueForKey:@"id"];
+    _myinfo.nickname=[data valueForKey:@"nickname"];
+    
+    
+    // here's where the actual save happens, and if it doesn't we print something out to the console
+    if (![_managedObjectContext save:&error])
+    {
+        NSLog(@"Problem saving: %@", [error localizedDescription]);
+    }
+    NSLog(@"New User : %@", _myinfo);
+    
+    
+}
+
+
 
 
 - (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString {
@@ -229,8 +286,26 @@
         
 }
 
+//카카오톡로그인
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    if ([KOSession isKakaoAccountLoginCallback:url])
+        return [KOSession handleOpenURL:url];
+    
+    return NO;
+}
 
 
+
+- (void) logout
+{
+    NSLog(@"로그아웃!!");
+    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
+    UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+    [_window setRootViewController:viewController];
+
+}
 
 
 @end

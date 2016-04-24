@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15A284" minimumToolsVersion="Automatic">
+    <entity name="Card" representedClassName="Card" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="introduction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone_number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="video" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="myinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyInfo" inverseName="mycards" inverseEntity="MyInfo" syncable="YES"/>
+    </entity>
     <entity name="MyInfo" representedClassName="MyInfo" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profile_image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mycards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Card" inverseName="myinfo" inverseEntity="Card" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MyInfo" positionX="117" positionY="-1395" width="128" height="73"/>
+        <element name="Card" positionX="142" positionY="-1309" width="128" height="148"/>
+        <element name="MyInfo" positionX="-108" positionY="-1350" width="128" height="88"/>
     </elements>
 </model>

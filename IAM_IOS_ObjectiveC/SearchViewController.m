@@ -53,7 +53,14 @@
     appDelegate.search_delegate=(id)self;
    UINavigationBar * navibar =self.navigationController.navigationBar;
     navibar.barTintColor=[UIColor colorWithRGBA:0x01afffff];
+    
+        
+}
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [self scan];
+    
 }
 
 - (IBAction)favorite_random_button:(id)sender {
@@ -83,11 +90,11 @@
     }
     
     // The state must be CBCentralManagerStatePoweredOn...
-    
     // ... so start scanning
     
-   [self scan];
-
+    
+    
+  
 }
 
 
@@ -266,7 +273,21 @@
     
 }
 
-
+- (IBAction)logout_click:(id)sender {
+    
+    [[KOSession sharedSession] logoutAndCloseWithCompletionHandler:^(BOOL success, NSError *error) {
+        if (success) {
+            // logout success.
+            [[[UIApplication sharedApplication] delegate] performSelector:@selector(logout)];
+        } else {
+            // failed
+            NSLog(@"failed to logout.");
+        }
+    }];
+    
+    
+    
+}
 
 
 

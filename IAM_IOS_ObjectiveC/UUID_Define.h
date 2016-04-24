@@ -10,8 +10,7 @@
 #define UUID_Define_h
 
 
-#define TRANSFER_SERVICE_UUID           @"20113258"
-#define TRANSFER_CHARACTERISTIC_UUID    @"1234"
+#define TRANSFER_SERVICE_UUID           @"20112017"
 
 
 #endif /* UUID_Define_h */

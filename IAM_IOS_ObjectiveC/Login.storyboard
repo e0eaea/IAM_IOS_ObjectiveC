@@ -19,83 +19,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-uC-L87">
-                                <rect key="frame" x="-8" y="0.0" width="387" height="681"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="DuY-uC-L87" secondAttribute="height" multiplier="379:667" id="P1e-k1-VKk"/>
-                                </constraints>
+                                <rect key="frame" x="-8" y="0.0" width="391" height="667"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이름을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="86I-yl-JRh" userLabel="Name_Field">
-                                <rect key="frame" x="77" y="246" width="225" height="42.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXq-W0-vVF" userLabel="Next">
+                                <rect key="frame" x="57" y="400" width="261" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="86I-yl-JRh" secondAttribute="height" multiplier="217:41" id="TA1-0M-r0U"/>
+                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="29:6" id="XPa-ds-Uyd"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="gpb-My-bjr" id="DXh-am-YfG"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FN-1e-Wdy" userLabel="Login_Line">
-                                <rect key="frame" x="77" y="283" width="225" height="6.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1FN-1e-Wdy" secondAttribute="height" multiplier="71:2" id="Jqy-U8-Soz"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="name_field.png"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXq-W0-vVF" userLabel="Next">
-                                <rect key="frame" x="77" y="324" width="225" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="217:32" id="te5-uR-Gtw"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="next.png"/>
+                                <state key="normal" image="KakaoLogin.png" backgroundImage="next.png"/>
                                 <connections>
                                     <action selector="next_click:" destination="gpb-My-bjr" eventType="touchUpInside" id="pbd-gE-p00"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호를 잊으셨나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMX-xt-kmk">
-                                <rect key="frame" x="179" y="354" width="123" height="28.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="WMX-xt-kmk" secondAttribute="height" multiplier="126:29" id="B7Y-ch-Xi5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Du-Uy-y06" userLabel="signUp">
-                                <rect key="frame" x="89" y="601" width="201" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="7Du-Uy-y06" secondAttribute="height" multiplier="193:24" id="7K1-hO-pMo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="sign_up.png"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="86I-yl-JRh" secondAttribute="trailing" constant="57" id="22F-xV-uAZ"/>
-                            <constraint firstItem="WMX-xt-kmk" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="-3.5" id="7JY-bS-Pi3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DuY-uC-L87" secondAttribute="trailing" constant="-20" id="A8I-LF-eoR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7Du-Uy-y06" secondAttribute="trailing" constant="69" id="DGt-lb-cSt"/>
-                            <constraint firstItem="1FN-1e-Wdy" firstAttribute="trailing" secondItem="86I-yl-JRh" secondAttribute="trailing" id="EZ5-ms-83A"/>
-                            <constraint firstItem="FXq-W0-vVF" firstAttribute="trailing" secondItem="1FN-1e-Wdy" secondAttribute="trailing" id="F0E-ml-9sJ"/>
-                            <constraint firstItem="86I-yl-JRh" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="226" id="Gec-aI-C5m"/>
-                            <constraint firstItem="7Du-Uy-y06" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="73" id="Ll3-SH-3p8"/>
-                            <constraint firstItem="DuY-uC-L87" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="-24" id="U7c-kE-q8p"/>
-                            <constraint firstItem="1FN-1e-Wdy" firstAttribute="top" secondItem="86I-yl-JRh" secondAttribute="bottom" constant="-5" id="dSK-ly-y27"/>
-                            <constraint firstItem="FXq-W0-vVF" firstAttribute="top" secondItem="1FN-1e-Wdy" secondAttribute="bottom" constant="34.5" id="dl4-Gr-Gqp"/>
-                            <constraint firstItem="1FN-1e-Wdy" firstAttribute="leading" secondItem="86I-yl-JRh" secondAttribute="leading" id="gDz-ud-wQb"/>
-                            <constraint firstItem="DuY-uC-L87" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="-20" id="iCp-xg-WCN"/>
-                            <constraint firstItem="WMX-xt-kmk" firstAttribute="trailing" secondItem="FXq-W0-vVF" secondAttribute="trailing" id="izb-f8-b8s"/>
-                            <constraint firstItem="FXq-W0-vVF" firstAttribute="leading" secondItem="1FN-1e-Wdy" secondAttribute="leading" id="kTv-2C-xFD"/>
-                            <constraint firstItem="86I-yl-JRh" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="61" id="kzg-aF-LrO"/>
-                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="7Du-Uy-y06" secondAttribute="bottom" constant="41" id="zsh-QC-Pjd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DuY-uC-L87" secondAttribute="trailing" constant="-24" id="09h-Ib-hSk"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="-20" id="0OE-wP-2pp"/>
+                            <constraint firstItem="FXq-W0-vVF" firstAttribute="centerX" secondItem="wAx-1c-Opw" secondAttribute="centerX" id="JSZ-SH-yka"/>
+                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="DuY-uC-L87" secondAttribute="bottom" id="gL4-pu-Ojc"/>
+                            <constraint firstItem="FXq-W0-vVF" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="380" id="inV-E4-dAw"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="-24" id="nzL-dK-4NH"/>
+                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="213" id="oaP-uu-ScD"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="name_field" destination="86I-yl-JRh" id="nAa-ww-SXd"/>
-                        <outlet property="next_button" destination="FXq-W0-vVF" id="BR7-Gc-OjE"/>
+                        <outlet property="kakao_button" destination="FXq-W0-vVF" id="BjG-ja-Yqr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1N-fw-eaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,9 +54,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="KakaoLogin.png" width="800" height="122"/>
         <image name="login-bg.png" width="1080" height="1920"/>
-        <image name="name_field.png" width="572" height="8"/>
         <image name="next.png" width="570" height="90"/>
-        <image name="sign_up.png" width="435" height="70"/>
     </resources>
 </document>
