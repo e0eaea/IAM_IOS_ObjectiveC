@@ -1,5 +1,5 @@
 //
-//  MyInfo+CoreDataProperties.m
+//  Video+CoreDataProperties.h
 //  IAM_IOS_ObjectiveC
 //
 //  Created by KMK on 2016. 5. 6..
@@ -9,12 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "MyInfo+CoreDataProperties.h"
+#import "Video.h"
 
-@implementation MyInfo (CoreDataProperties)
+NS_ASSUME_NONNULL_BEGIN
 
-@dynamic id;
-@dynamic nickname;
-@dynamic mycards;
+@interface Video (CoreDataProperties)
+
+@property (nullable, nonatomic, retain) NSData *video;
+@property (nullable, nonatomic, retain) Card *card;
 
 @end
+
+NS_ASSUME_NONNULL_END

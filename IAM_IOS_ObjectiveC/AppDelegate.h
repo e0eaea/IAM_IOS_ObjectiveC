@@ -30,6 +30,7 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString;
+- (void) uploadImageLegacy:(UIImage *)image json:(NSString*)jsonString;
 - (void) check_login:(NSDictionary *)data;
 - (void) logout;
 - (MyInfo *)getMyInfo;

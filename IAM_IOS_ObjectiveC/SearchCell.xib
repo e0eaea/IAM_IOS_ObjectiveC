@@ -40,12 +40,19 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="star.png"/>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L9j-vc-yS9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="L9j-vc-yS9">
                                 <rect key="frame" x="25" y="17" width="92" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="L9j-vc-yS9" secondAttribute="height" multiplier="1:1" id="5xu-9r-TNl"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ii6-dK-VId">
+                                <rect key="frame" x="181" y="55" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ii6-dK-VId" secondAttribute="height" multiplier="1:1" id="MTD-NB-m3p"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -53,6 +60,7 @@
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="top" secondItem="L9j-vc-yS9" secondAttribute="top" id="0Vi-fH-5Nt"/>
                             <constraint firstItem="L9j-vc-yS9" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="25" id="1m6-TO-ipg"/>
                             <constraint firstAttribute="bottom" secondItem="L9j-vc-yS9" secondAttribute="bottom" constant="20" id="1zz-iO-ogs"/>
+                            <constraint firstItem="ii6-dK-VId" firstAttribute="leading" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" constant="-210" id="49R-R4-sS4"/>
                             <constraint firstAttribute="bottom" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" id="ALT-fa-Zj5"/>
                             <constraint firstItem="L9j-vc-yS9" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="17" id="JBM-FC-awb"/>
                             <constraint firstAttribute="trailing" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" constant="8" id="XI6-Sa-ev1"/>
@@ -60,6 +68,7 @@
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="leading" secondItem="L9j-vc-yS9" secondAttribute="trailing" constant="32" id="e03-au-5aL"/>
                             <constraint firstAttribute="trailing" secondItem="4H2-4z-0jC" secondAttribute="trailing" constant="28" id="hIZ-zd-e4q"/>
                             <constraint firstItem="Vhy-lS-Pw7" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="8" id="sNp-s9-RSd"/>
+                            <constraint firstItem="ii6-dK-VId" firstAttribute="top" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" constant="-74" id="xgf-Z4-k5N"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -76,12 +85,14 @@
                 <outlet property="like_button" destination="4H2-4z-0jC" id="Ynj-S2-kzu"/>
                 <outlet property="name" destination="Qfo-yQ-9Bm" id="znx-Uq-haZ"/>
                 <outlet property="profile_image" destination="L9j-vc-yS9" id="SBu-Sk-yxi"/>
+                <outlet property="progressing" destination="ii6-dK-VId" id="J45-x8-B2C"/>
             </connections>
-            <point key="canvasLocation" x="326.5" y="447.5"/>
+            <point key="canvasLocation" x="321.5" y="318.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="card_shadow.png" width="1047" height="373"/>
+        <image name="image_empty.png" width="996" height="768"/>
         <image name="star.png" width="65" height="65"/>
     </resources>
 </document>

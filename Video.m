@@ -1,17 +1,15 @@
 //
-//  Card.m
+//  Video.m
 //  IAM_IOS_ObjectiveC
 //
 //  Created by KMK on 2016. 5. 6..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
-#import "Card.h"
-#import "Image.h"
-#import "MyInfo.h"
 #import "Video.h"
+#import "Card.h"
 
-@implementation Card
+@implementation Video
 
 // Insert code here to add functionality to your managed object subclass
 

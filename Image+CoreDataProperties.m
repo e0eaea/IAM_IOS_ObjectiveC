@@ -1,5 +1,5 @@
 //
-//  MyInfo+CoreDataProperties.m
+//  Image+CoreDataProperties.m
 //  IAM_IOS_ObjectiveC
 //
 //  Created by KMK on 2016. 5. 6..
@@ -9,12 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "MyInfo+CoreDataProperties.h"
+#import "Image+CoreDataProperties.h"
 
-@implementation MyInfo (CoreDataProperties)
+@implementation Image (CoreDataProperties)
 
-@dynamic id;
-@dynamic nickname;
-@dynamic mycards;
+@dynamic image;
+@dynamic card;
 
 @end

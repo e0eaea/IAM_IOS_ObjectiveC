@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gpb-My-bjr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gpb-My-bjr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -24,9 +24,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXq-W0-vVF" userLabel="Next">
                                 <rect key="frame" x="57" y="400" width="261" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="29:6" id="XPa-ds-Uyd"/>
+                                    <constraint firstAttribute="height" constant="54" id="1r6-8u-dGi"/>
+                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="29:6" id="DVI-QC-J2q"/>
+                                    <constraint firstAttribute="width" constant="261" id="yt5-Bx-IAN"/>
                                 </constraints>
-                                <state key="normal" image="KakaoLogin.png" backgroundImage="next.png"/>
+                                <state key="normal" backgroundImage="KakaoLogin.png"/>
                                 <connections>
                                     <action selector="next_click:" destination="gpb-My-bjr" eventType="touchUpInside" id="pbd-gE-p00"/>
                                 </connections>
@@ -36,11 +38,10 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="DuY-uC-L87" secondAttribute="trailing" constant="-24" id="09h-Ib-hSk"/>
                             <constraint firstItem="DuY-uC-L87" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="-20" id="0OE-wP-2pp"/>
+                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="213" id="BoX-nQ-VrH"/>
                             <constraint firstItem="FXq-W0-vVF" firstAttribute="centerX" secondItem="wAx-1c-Opw" secondAttribute="centerX" id="JSZ-SH-yka"/>
                             <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="DuY-uC-L87" secondAttribute="bottom" id="gL4-pu-Ojc"/>
-                            <constraint firstItem="FXq-W0-vVF" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="380" id="inV-E4-dAw"/>
                             <constraint firstItem="DuY-uC-L87" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="-24" id="nzL-dK-4NH"/>
-                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="213" id="oaP-uu-ScD"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -56,6 +57,5 @@
     <resources>
         <image name="KakaoLogin.png" width="800" height="122"/>
         <image name="login-bg.png" width="1080" height="1920"/>
-        <image name="next.png" width="570" height="90"/>
     </resources>
 </document>

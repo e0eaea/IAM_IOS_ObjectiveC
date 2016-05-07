@@ -27,8 +27,8 @@
 @property (strong, nonatomic) CBCentralManager      *centralManager;
 @property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 
-@property (nonatomic)  NSMutableArray *request_ids;
 @property (nonatomic)  NSMutableArray * tableData;
+@property (nonatomic) NSTimer* timer;
 @property (nonatomic) int num;
 
 @end
@@ -42,19 +42,21 @@
     
     // Start up the CBCentralManager
     _centralManager = [[CBCentralManager alloc] initWithDelegate:(id)self queue:nil];
-
     
-    _request_ids=[NSMutableArray new];
     _tableData=[NSMutableArray new];
- 
+    
     _num=0;
-
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.search_delegate=(id)self;
-   UINavigationBar * navibar =self.navigationController.navigationBar;
+    UINavigationBar * navibar =self.navigationController.navigationBar;
     navibar.barTintColor=[UIColor colorWithRGBA:0x01afffff];
     
-        
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self
+                                            selector:@selector(background_cleaner:) userInfo:nil repeats:YES];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -65,13 +67,13 @@
 
 - (IBAction)favorite_random_button:(id)sender {
     
-   int tag = (int)[sender tag];
+    int tag = (int)[sender tag];
     
     if(tag==0)
     {
-         [_favorite_button setBackgroundImage:[UIImage imageNamed:@"favorite_selected.png" ] forState:UIControlStateNormal];
-          [_random_button setBackgroundImage:[UIImage imageNamed:@"random_white.png" ] forState:UIControlStateNormal];
-    
+        [_favorite_button setBackgroundImage:[UIImage imageNamed:@"favorite_selected.png" ] forState:UIControlStateNormal];
+        [_random_button setBackgroundImage:[UIImage imageNamed:@"random_white.png" ] forState:UIControlStateNormal];
+        
     }
     
     else{
@@ -94,7 +96,7 @@
     
     
     
-  
+    
 }
 
 
@@ -116,7 +118,7 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    BOOL flag=true;
+    bool flag=true;
     
     // Reject any where the value is above reasonable range
     if (RSSI.integerValue > -5) {
@@ -128,63 +130,48 @@
         return;
     }
     
-    //NSLog(@"Discovered %@ at %@,%@", peripheral.name,advertisementData, RSSI);
     
     NSString *bluetooth_id=[advertisementData objectForKey:@"kCBAdvDataLocalName"];
-    // NSString *uuid=[advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"][0];
     
     if(!bluetooth_id) bluetooth_id=@"team";
-    //if(!uuid) uuid=@"UUID없음";
     
-   // NSLog(@"\n블루투스를 통해 받은 정보 %@", advertisementData);
+    //NSLog(@"받아온 신호 %@",bluetooth_id);
     
-    /*
-    if(_num <5) { NSLog(@"값이 뭔데? %d",_num); _num++;   }
-    else { flag=false;   }
-    */
+    for(Client * client in _tableData)
+        if([client.id isEqualToString:bluetooth_id])
+        { flag=false; [self renew_usebit:bluetooth_id]; break;}
     
-    for(NSString* request_id in _request_ids)
-        if([request_id isEqualToString:bluetooth_id])
-          { flag=false; break;}
-
     
     if(flag)
     {
-        [_request_ids addObject:bluetooth_id];
+        Client *new_client=[[Client alloc]initWithClientID:bluetooth_id];
+        [_tableData addObject:new_client];
         [Client request_brief_info:bluetooth_id];
+        
     }
     
-    
-    /*
-    [_tableData addObject:new_client];
-    [_tableView reloadData];
-    
-    
-    NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
-    [_tableView scrollToRowAtIndexPath:topIndexPath
-                      atScrollPosition:UITableViewScrollPositionTop
-                              animated:YES];
-    
-    */
 }
 
 
 //서버로부터 정보를 받아옴!
 - (void) response_brief_info:(NSDictionary *)info
 {
+    NSString *client_id=[info objectForKey:@"id"];
     
-    Client *new_client=[[Client alloc]init];
-    new_client.id=[info objectForKey:@"id"];
-    new_client.name=[info objectForKey:@"nickname"];
-    new_client.base64_image=[NSData dataFromBase64String:[info objectForKey:@"profile_picture"]];
+    for( Client* new_client in _tableData)
+        if([client_id isEqualToString:new_client.id])
+        {
+            new_client.name=[info objectForKey:@"nickname"];
+            new_client.base64_image=[NSData dataFromBase64String:[info objectForKey:@"profile_picture"]];
+            new_client.status=YES;
+            
+        }
     
-    
+    NSLog(@"here!!");
     
     dispatch_async(dispatch_get_main_queue(), ^{
-
         
-        [_tableData addObject:new_client];
+        
         [_tableView reloadData];
         
         
@@ -214,8 +201,6 @@
 //섹션의 row갯수 반환
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    
     return _tableData.count;
 }
 
@@ -229,8 +214,6 @@
     
     
     cell.client_info = (Client *)_tableData[indexPath.row];
-    
-
     
     [cell adjust];
     
@@ -269,7 +252,7 @@
     
     
     [self.navigationController pushViewController:detail animated:YES];
-  
+    
     
 }
 
@@ -290,7 +273,70 @@
 }
 
 
+//백그라운드에서 하는 일
+- (void)background_cleaner:(NSTimer *)theTimer {
+    [self reduce_usebit];
+    [self remove_client];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [_tableView reloadData];
+        
+        NSIndexPath *topIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        if([_tableData count]>0)
+            [_tableView scrollToRowAtIndexPath:topIndexPath
+                              atScrollPosition:UITableViewScrollPositionTop
+                                      animated:YES];
+        
+    });
+    
+}
 
+
+//usebit 조정
+- (void) renew_usebit:(NSString *)client_id
+{
+    for(Client * client in _tableData)
+        if([client.id isEqualToString:client_id])
+            client.usebit=2;
+    
+}
+
+-(void) reduce_usebit
+{
+    for(Client * client in _tableData)
+        client.usebit-=1;
+}
+
+
+-(void) remove_client
+{
+    bool flag=false;
+    
+    for(Client * client in _tableData)
+        if(client.usebit<=0)
+        {flag=true; break;}
+    
+    if(flag)
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSMutableArray *tempArray = [_tableData mutableCopy];
+            for(Client * client in _tableData)
+                if(client.usebit<=0)
+                    [tempArray removeObject:client];
+            
+            _tableData=tempArray;
+            
+            [_tableView reloadData];
+            
+        });
+        
+    }
+    
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -311,13 +357,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *like_button;
 
 @property (strong, nonatomic) Client *client_info;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressing;
 
 - (void) adjust;
 

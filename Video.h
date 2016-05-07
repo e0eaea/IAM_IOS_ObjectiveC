@@ -1,5 +1,5 @@
 //
-//  MyInfo.h
+//  Video.h
 //  IAM_IOS_ObjectiveC
 //
 //  Created by KMK on 2016. 5. 6..
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyInfo : NSManagedObject
+@interface Video : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "MyInfo+CoreDataProperties.h"
+#import "Video+CoreDataProperties.h"

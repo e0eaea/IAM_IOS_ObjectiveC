@@ -12,4 +12,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *id_label;
 @property (strong, nonatomic) IBOutlet UISwitch *advertisingSwitch;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableview;
+@property (strong, nonatomic) IBOutlet UIView *topbar;
+
 @end

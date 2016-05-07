@@ -11,6 +11,17 @@
 
 @implementation Client
 
+- (id) initWithClientID:(NSString*)client_id
+{
+    self = [super init];
+    
+    _id=client_id;
+    _usebit= 2; //유즈비트 2로 설정
+    _status=false;
+    
+    return self;
+}
+
 //서버에 정보요청!
 + (void) request_brief_info:(NSString *)id
 {

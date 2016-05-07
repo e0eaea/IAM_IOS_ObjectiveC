@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Detail_Card_ViewController">
@@ -17,40 +16,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogE-J2-PYu" userLabel="card_name">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogE-J2-PYu" userLabel="card_name">
                     <rect key="frame" x="120" y="475" width="135" height="39"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="ogE-J2-PYu" secondAttribute="height" multiplier="45:13" id="bSV-ub-znK"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="0sa-kJ-Qib">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="name_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="0sa-kJ-Qib">
                     <rect key="frame" x="120" y="506" width="135" height="8"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="0sa-kJ-Qib" secondAttribute="height" multiplier="135:8" id="b7d-4V-dVl"/>
-                    </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="HED-nM-y8m">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="HED-nM-y8m">
                     <rect key="frame" x="31" y="110" width="313" height="313"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="HED-nM-y8m" secondAttribute="height" multiplier="1:1" id="fiT-x6-srH"/>
-                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="0sa-kJ-Qib" firstAttribute="trailing" secondItem="ogE-J2-PYu" secondAttribute="trailing" id="E4g-6k-N7g"/>
-                <constraint firstItem="ogE-J2-PYu" firstAttribute="top" secondItem="HED-nM-y8m" secondAttribute="bottom" constant="52" id="Nnp-8n-Mev"/>
-                <constraint firstAttribute="trailing" secondItem="ogE-J2-PYu" secondAttribute="trailing" constant="120" id="V0F-wO-we1"/>
-                <constraint firstAttribute="trailing" secondItem="HED-nM-y8m" secondAttribute="trailing" constant="31" id="WVe-al-5JJ"/>
-                <constraint firstItem="HED-nM-y8m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="31" id="efo-BG-Ggf"/>
-                <constraint firstItem="ogE-J2-PYu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="120" id="ezb-kh-6Ut"/>
-                <constraint firstItem="0sa-kJ-Qib" firstAttribute="leading" secondItem="ogE-J2-PYu" secondAttribute="leading" id="gBI-JZ-yiV"/>
-                <constraint firstItem="0sa-kJ-Qib" firstAttribute="top" secondItem="ogE-J2-PYu" secondAttribute="bottom" constant="-8" id="krg-Ka-Wv2"/>
-                <constraint firstItem="HED-nM-y8m" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="110" id="ypr-cb-0k7"/>
-            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>

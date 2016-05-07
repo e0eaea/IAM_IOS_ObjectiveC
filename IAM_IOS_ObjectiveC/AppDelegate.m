@@ -24,10 +24,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-   
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     UIViewController* viewController;
-
+    
     
     KOSession *session = [KOSession sharedSession];
     
@@ -47,7 +47,7 @@
         
     }
     
-     [_window setRootViewController:viewController];
+    [_window setRootViewController:viewController];
     
     
     return YES;
@@ -62,7 +62,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-   
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -72,12 +72,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     /*
-    if([[KOSession sharedSession] isOpen]) {
-        
-        NSLog(@"KOSession is alived.");
-        [KOSession handleDidBecomeActive];
-    }
-
+     if([[KOSession sharedSession] isOpen]) {
+     
+     NSLog(@"KOSession is alived.");
+     [KOSession handleDidBecomeActive];
+     }
+     
      */
 }
 
@@ -86,7 +86,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     
     
-  [self saveContext];
+    [self saveContext];
     
 }
 
@@ -188,9 +188,14 @@
     [fetchRequest setEntity:entity];
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
-    MyInfo *myinfo=[fetchedObjects objectAtIndex:0];
+    if([fetchedObjects count]==0)
+        return NULL;
+    else
+    { MyInfo *myinfo=[fetchedObjects objectAtIndex:0];
+        return myinfo;
+        
+    }
     
-    return myinfo;
 }
 
 - (void) saveData:(NSDictionary *)data {     //UserInfo Save
@@ -244,46 +249,46 @@
     
     //    NSOperationQueue *queue = [[NSOperationQueue alloc]init];
     
-   
+    
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:urlRequest
-                                    completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError) {
-  
-       NSLog(@"받아옴!");
-   
-                                       
-                                        
-        if ([data length] > 0 && connectionError == nil) {
-            
-        
-            NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSError *error;
-            NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
-            
-           //NSLog(@"diction : %@", diction);
-            // NSString *method = [diction valueForKey:@"type"];
-            
-            
-            
-            if (connectionError !=nil){
-                
-                NSLog(@"Error happened = %@",connectionError);
-                
-            }
-            
-            if([urlString isEqualToString:brief_info])
-                [_search_delegate response_brief_info:diction];
-                
-            
-            else if([urlString isEqualToString:more_info])
-               [[NSNotificationCenter defaultCenter] postNotificationName:@"more_info"
-                                                                object:nil userInfo:diction];
-            
-            
-        }
-        
-    }]resume];
-        
+                                     completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError) {
+                                         
+                                         NSLog(@"받아옴!");
+                                         
+                                         
+                                         
+                                         if ([data length] > 0 && connectionError == nil) {
+                                             
+                                             
+                                             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                             NSError *error;
+                                             NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+                                             
+                                             //NSLog(@"diction : %@", diction);
+                                             // NSString *method = [diction valueForKey:@"type"];
+                                             
+                                             
+                                             
+                                             if (connectionError !=nil){
+                                                 
+                                                 NSLog(@"Error happened = %@",connectionError);
+                                                 
+                                             }
+                                             
+                                             if([urlString isEqualToString:brief_info])
+                                                 [_search_delegate response_brief_info:diction];
+                                             
+                                             
+                                             else if([urlString isEqualToString:more_info])
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"more_info"
+                                                                                                     object:nil userInfo:diction];
+                                             
+                                             
+                                         }
+                                         
+                                     }]resume];
+    
 }
 
 //카카오톡로그인
@@ -304,8 +309,54 @@
     UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
     UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
     [_window setRootViewController:viewController];
-
+    
 }
+
+
+- (void) uploadImageLegacy:(UIImage *)image json:(NSString*)jsonString{
+    //upload single image
+    NSURL *url = [NSURL URLWithString:card_image_upload];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
+    [request setHTTPMethod:@"POST"];
+    NSString *contentTypeValue = [NSString stringWithFormat:@"multipart/form-data; boundary=%s", POST_BODY_BOURDARY];
+    [request addValue:contentTypeValue forHTTPHeaderField:@"Content-type"];
+    
+    NSMutableData *dataForm = [NSMutableData alloc];
+    
+    
+    //image
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.9);
+    [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%@.jpg\"\r\n", @"picture"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[[NSString stringWithFormat:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[NSData dataWithData:imageData]];
+    [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s--\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    //  json
+    [dataForm appendData:[[NSString stringWithFormat:@"--%s\r\n", POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@_time\" \r\n\r\n",@"mkmk"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm  appendData:[[NSString stringWithFormat:@"%@", jsonString] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm  appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // close form
+    [dataForm appendData:[[NSString stringWithFormat:@"--%s--\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [request setHTTPBody:dataForm];
+    
+    
+    
+    NSLog(@"리퀘스트는 ");
+  
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:(id)self delegateQueue:nil];
+    NSURLSessionUploadTask *uploadTask = [urlSession uploadTaskWithRequest:request fromData:dataForm];
+    [uploadTask resume];
+    
+   
+    
+}
+
 
 
 @end

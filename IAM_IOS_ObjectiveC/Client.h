@@ -13,10 +13,13 @@
 
 @interface Client : NSObject
 
-
+@property (nonatomic) bool status;
 @property (strong, nonatomic) NSString* id;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSData* base64_image;
+@property (nonatomic) int usebit;
+
+- (id) initWithClientID:(NSString*)client_id;
 
 + (void) request_brief_info:(NSString *)id;
 

@@ -60,7 +60,12 @@
                             
                             NSDictionary *kakaoData = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
                             
+                            NSString *userJsonData = [Common_modules transToJson:kakaoData];
+                            
+                            [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:sign_up];
+                            
                             [self check_login:kakaoData];
+                            
                             
                         }
                         else
@@ -148,6 +153,8 @@
             [alert addAction:noButton];
             
             [self presentViewController:alert animated:YES completion:nil];
+            
+            
         }
     }
 
