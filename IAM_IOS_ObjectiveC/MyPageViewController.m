@@ -35,8 +35,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self.navigationController setNavigationBarHidden:YES];
-    _topbar.backgroundColor=[UIColor colorWithRGBA:0x01afffff];
+    [self.navigationController setNavigationBarHidden:NO];
     
     UINavigationBar * navibar =self.navigationController.navigationBar;
     navibar.barTintColor=[UIColor colorWithRGBA:0x01afffff];
@@ -59,6 +58,8 @@
         [_tableview scrollToRowAtIndexPath:topIndexPath
                           atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController.navigationBar setHidden:NO];
     
 }
 
@@ -168,9 +169,10 @@
     
     CardTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"CardTableViewCell" owner:self options:nil]
                                objectAtIndex:0];
+    Card *card=[_tableData objectAtIndex:indexPath.row];
     
-    
-    
+    cell.card_image.image=[UIImage imageWithData: card.main_image];
+
     
     return cell;
 }
@@ -198,14 +200,10 @@
 {
     NSLog(@"셀클릭");
     
-    
-    if(indexPath.row==_tableData.count-1)
-        NSLog(@"마지막");
-    /*
-     
-     
-     */
-    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MyCardViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MyCardViewController"];
+    [vc setting_exist_card:[_tableData objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -238,6 +236,8 @@
                                         
                                         
                                         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                        
+
                                         
                                     }];
         
@@ -274,7 +274,9 @@
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MyCardViewController *vc = [sb instantiateViewControllerWithIdentifier:@"MyCardViewController"];
-    [vc new_card_create:_myInfo];
+    
+    int total_card=(int)[_myInfo.mycards count];
+    [vc new_card_create:_myInfo card_num:total_card];
     
     [self.navigationController pushViewController:vc animated:YES];
     

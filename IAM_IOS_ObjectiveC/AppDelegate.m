@@ -257,7 +257,6 @@
                                          NSLog(@"받아옴!");
                                          
                                          
-                                         
                                          if ([data length] > 0 && connectionError == nil) {
                                              
                                              
@@ -313,7 +312,7 @@
 }
 
 
-- (void) uploadImageLegacy:(UIImage *)image json:(NSString*)jsonString{
+- (void) uploadImageLegacy:(NSArray*)images json:(NSString*)jsonString{
     //upload single image
     NSURL *url = [NSURL URLWithString:card_image_upload];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
@@ -323,23 +322,35 @@
     
     NSMutableData *dataForm = [NSMutableData alloc];
     
+
+    for(int i=0; i<[images count]; i++)
+    {
+        Image *image=[images objectAtIndex:i];
+        //image
+        [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+         if(i==[images count]-1)
+          [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"main.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+         else
+          [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%d.jpg\"\r\n",i] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        [dataForm appendData:[[NSString stringWithFormat:@"Content-Type:image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+       
+         [dataForm appendData:[NSData dataWithData:image.image]];
+        [dataForm  appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }
     
-    //image
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.9);
-    [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%@.jpg\"\r\n", @"picture"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm appendData:[[NSString stringWithFormat:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm appendData:[NSData dataWithData:imageData]];
-    [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s--\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    //json
+    [dataForm appendData:[[NSString stringWithFormat:@"--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Disposition: form-data; name=\"json\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Type: application/json; charset=UTF-8\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Transfer-Encoding: 8bit\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     
-    //  json
-    [dataForm appendData:[[NSString stringWithFormat:@"--%s\r\n", POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@_time\" \r\n\r\n",@"mkmk"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm  appendData:[[NSString stringWithFormat:@"%@", jsonString] dataUsingEncoding:NSUTF8StringEncoding]];
-    [dataForm  appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[[NSString stringWithFormat:@"%@\r\n", jsonString] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    // close form
+    //close
     [dataForm appendData:[[NSString stringWithFormat:@"--%s--\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
     
     [request setHTTPBody:dataForm];

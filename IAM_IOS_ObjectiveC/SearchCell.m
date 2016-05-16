@@ -49,7 +49,6 @@
     {   _name.text=@"";
         NSLog(@" 프로그래스 돌아가");
     
-    
         _like_button.hidden=YES;
         self.contentView.userInteractionEnabled=NO;
         _progressing.hidesWhenStopped = YES;

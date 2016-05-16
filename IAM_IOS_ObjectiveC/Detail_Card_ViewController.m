@@ -12,6 +12,23 @@
 
 
 @interface Detail_Card_ViewController ()
+@property (strong, nonatomic) IBOutlet UIButton *k1;
+@property (strong, nonatomic) IBOutlet UIButton *k2;
+@property (strong, nonatomic) IBOutlet UIButton *k3;
+@property (strong, nonatomic) IBOutlet UIButton *k4;
+@property (strong, nonatomic) IBOutlet UIButton *k5;
+
+@property (strong, nonatomic) IBOutlet UIButton *main_image;
+
+@property (strong, nonatomic) IBOutlet UITextField *nickname;
+
+@property (strong, nonatomic) IBOutlet UIButton *hide_status;
+
+@property (strong, nonatomic) IBOutlet UIButton *phone_button;
+@property (strong, nonatomic) IBOutlet UIButton *sns_button;
+@property (strong, nonatomic) IBOutlet UIButton *video_button;
+@property (strong, nonatomic) IBOutlet UIButton *add_card;
+
 @property (nonatomic, retain) UIActivityIndicatorView *registrationProgressing;
 
 @end
@@ -20,8 +37,13 @@
 
 -(id) init_with_client_info:(Client *)client
 {
+    
+    NSLog(@"클라이언트 아이디1 %@!!!",client.id);
+    
     if(self = [super init])
-        _client=client;
+    {  _client=client;
+       [Client request_more_info:_client.id];
+    }
 
     
     return self;
@@ -45,28 +67,20 @@
                                              selector:@selector(receive_more_info:)
                                                  name:@"more_info"
                                                object:nil];
-    
-    [Client request_more_info:_client.id];
-    
-    
-   
-
 }
 
 
 - (void)receive_more_info:(NSNotification *) notification
 {
     
-    
     NSLog(@"자세한 정보 받아옴!");
     
     
-
     dispatch_async(dispatch_get_main_queue(), ^{
         
-    _card_image.image=[UIImage imageWithData:
-                       [NSData dataFromBase64String:[notification.userInfo objectForKey:@"profile_picture"]]];
-    _card_name.text=[notification.userInfo objectForKey:@"nickname"];
+    [_main_image setBackgroundImage:[UIImage imageWithData:[NSData dataFromBase64String:[notification.userInfo objectForKey:@"profile_picture"]]]
+                           forState:UIControlStateNormal];
+    _nickname.text=[notification.userInfo objectForKey:@"nickname"];
  
     [_registrationProgressing stopAnimating];
     [_registrationProgressing removeFromSuperview];

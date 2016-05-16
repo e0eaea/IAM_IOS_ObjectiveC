@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Image.h"
 
-@interface Card_image_ViewController : UIViewController
+@interface C_Image_ViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UILabel *title_text;
+@property (strong, nonatomic) IBOutlet UIButton *main_register;
 @property (strong, nonatomic) IBOutlet UIButton *close_button;
+
+@property (nonatomic,strong) UIViewController * card_images;
+
 @property NSUInteger pageIndex;
-@property NSData *imgFile;
-@property NSString *txtTitle;
+@property Image *imgFile;
+
 
 @end

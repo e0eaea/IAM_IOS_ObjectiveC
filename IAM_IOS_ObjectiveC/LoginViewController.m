@@ -80,6 +80,8 @@
 
 - (void) check_login:(NSDictionary *)data
 {
+    NSLog(@"로그인 넘어가기");
+    
     MyInfo *myinfo=[[[UIApplication sharedApplication] delegate] performSelector:@selector(getMyInfo)];
     NSString *message=@"";
     
@@ -154,9 +156,19 @@
             
             [self presentViewController:alert animated:YES completion:nil];
             
+        }
+        
+        else{
+            UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
+            UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+            
+            [_window setRootViewController:viewController];
+
             
         }
+        
     }
+    NSLog(@"넘어가기 끝");
 
 }
 

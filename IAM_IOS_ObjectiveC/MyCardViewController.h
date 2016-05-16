@@ -16,5 +16,7 @@
 
 @interface MyCardViewController : UIViewController
 
-- (void) new_card_create:(MyInfo*) info;
+- (void) new_card_create:(MyInfo*) info card_num:(int)card_num;
+- (void) setting_exist_card:(Card*) card;
+
 @end

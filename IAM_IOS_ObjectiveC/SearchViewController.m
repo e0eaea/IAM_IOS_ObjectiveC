@@ -39,10 +39,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    // Start up the CBCentralManager
-    _centralManager = [[CBCentralManager alloc] initWithDelegate:(id)self queue:nil];
-    
     _tableData=[NSMutableArray new];
     
     _num=0;
@@ -52,10 +48,13 @@
     UINavigationBar * navibar =self.navigationController.navigationBar;
     navibar.barTintColor=[UIColor colorWithRGBA:0x01afffff];
     
+    // Start up the CBCentralManager
+    _centralManager = [[CBCentralManager alloc] initWithDelegate:(id)self queue:nil];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self
                                             selector:@selector(background_cleaner:) userInfo:nil repeats:YES];
     
+ 
     
 }
 
@@ -64,6 +63,17 @@
     [self scan];
     
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Don't keep it going while we're not showing.
+    [self.centralManager stopScan];
+     NSLog(@"Scanning stopped");
+     _timer=nil;
+    
+    [super viewWillDisappear:animated];
+}
+
 
 - (IBAction)favorite_random_button:(id)sender {
     
@@ -95,7 +105,7 @@
     // ... so start scanning
     
     
-    
+       [self scan];
     
 }
 
@@ -111,9 +121,7 @@
     
     [self.centralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:TRANSFER_SERVICE_UUID]]
                                                 options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
-    
-    
-    
+
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
@@ -133,9 +141,9 @@
     
     NSString *bluetooth_id=[advertisementData objectForKey:@"kCBAdvDataLocalName"];
     
-    if(!bluetooth_id) bluetooth_id=@"team";
+    if(bluetooth_id==nil) return;
     
-    //NSLog(@"받아온 신호 %@",bluetooth_id);
+   // NSLog(@"받아온 신호 %@",bluetooth_id);
     
     for(Client * client in _tableData)
         if([client.id isEqualToString:bluetooth_id])
@@ -158,13 +166,15 @@
 {
     NSString *client_id=[info objectForKey:@"id"];
     
+    NSLog(@"%@",info);
+    NSLog(@"가져온 정보의 id는 %@",client_id);
+    
     for( Client* new_client in _tableData)
         if([client_id isEqualToString:new_client.id])
         {
             new_client.name=[info objectForKey:@"nickname"];
             new_client.base64_image=[NSData dataFromBase64String:[info objectForKey:@"profile_picture"]];
             new_client.status=YES;
-            
         }
     
     NSLog(@"here!!");
@@ -338,14 +348,6 @@
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    // Don't keep it going while we're not showing.
-    [self.centralManager stopScan];
-    NSLog(@"Scanning stopped");
-    
-    [super viewWillDisappear:animated];
-}
 
 
 

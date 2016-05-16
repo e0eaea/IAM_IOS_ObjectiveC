@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Card_image_ViewController.h"
+#import "C_Image_ViewController.h"
 #import "Card.h"
 
 
@@ -15,10 +15,10 @@
 
 
 @property (nonatomic,strong) UIPageViewController *PageViewController;
-@property (nonatomic,strong) NSMutableArray *arrPageTitles;
+@property (nonatomic,strong) NSData *main_image_data;
 @property (nonatomic,strong) NSMutableArray *arrPageImages;
 
-- (Card_image_ViewController *)viewControllerAtIndex:(NSUInteger)index;
+- (C_Image_ViewController *)viewControllerAtIndex:(NSUInteger)index;
 -(void) setup_images:(Card *)card;
 
 @end

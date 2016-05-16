@@ -11,10 +11,8 @@
 
 
 @interface Detail_Card_ViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIImageView *card_image;
-@property (strong, nonatomic) IBOutlet UILabel *card_name;
-@property (strong, nonatomic) Client *client;
 
+@property (strong, nonatomic) Client *client;
 
 -(id) init_with_client_info:(Client *)client;
 @end

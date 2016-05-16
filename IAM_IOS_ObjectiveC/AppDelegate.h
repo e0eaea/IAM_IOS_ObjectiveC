@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "MyInfo.h"
+#import "Card.h"
+#import "Image.h"
 #import "Server_address.h"
 #import "SearchDelegate.h"
 #import "UIColor+Helper.h"
@@ -30,8 +32,7 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString;
-- (void) uploadImageLegacy:(UIImage *)image json:(NSString*)jsonString;
-- (void) check_login:(NSDictionary *)data;
+- (void) uploadImageLegacy:(NSArray*)images json:(NSString*)jsonString;
 - (void) logout;
 - (MyInfo *)getMyInfo;
 - (void) saveData:(NSDictionary *)data ;

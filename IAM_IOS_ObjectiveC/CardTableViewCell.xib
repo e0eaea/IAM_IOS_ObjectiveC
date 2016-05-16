@@ -38,7 +38,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardName.png" translatesAutoresizingMaskIntoConstraints="NO" id="3fe-bF-tv7">
                         <rect key="frame" x="8" y="115" width="445" height="57"/>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1A-HM-Ii6" userLabel="card_title">
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1A-HM-Ii6" userLabel="card_title">
                         <rect key="frame" x="8" y="115" width="445" height="57"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="57" id="C4X-sc-tQb"/>
