@@ -2,14 +2,14 @@
 //  Card.h
 //  IAM_IOS_ObjectiveC
 //
-//  Created by KMK on 2016. 5. 13..
+//  Created by KMK on 2016. 5. 18..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Image, MyInfo, Video;
+@class Image, MyInfo, Other_Info, Video;
 
 NS_ASSUME_NONNULL_BEGIN
 

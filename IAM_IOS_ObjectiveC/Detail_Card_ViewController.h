@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) Client *client;
 
--(id) init_with_client_info:(Client *)client;
+-(id) init_with_client_info:(Client *)client from_favorite:(bool)from_favorite;
+
 @end

@@ -186,6 +186,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyInfo" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
+    
     NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if([fetchedObjects count]==0)
@@ -253,38 +254,87 @@
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:urlRequest
                                      completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError) {
-                                         
-                                         NSLog(@"받아옴!");
-                                         
-                                         
+                                        
+
                                          if ([data length] > 0 && connectionError == nil) {
                                              
                                              
                                              NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+                                             
                                              NSError *error;
                                              NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
                                              
-                                             //NSLog(@"diction : %@", diction);
                                              // NSString *method = [diction valueForKey:@"type"];
-                                             
-                                             
-                                             
-                                             if (connectionError !=nil){
+       
+                                             if (connectionError!=nil){
                                                  
                                                  NSLog(@"Error happened = %@",connectionError);
                                                  
                                              }
                                              
-                                             if([urlString isEqualToString:brief_info])
+                                             if([urlString isEqualToString:random_info])
+                                             {
                                                  [_search_delegate response_brief_info:diction];
+                                             }
+                                             
+                                             else if([urlString isEqualToString:interest_info])
+                                             {  [_search_delegate response_brief_info:diction];  NSLog(@"관심사 정보 가져옴");}
                                              
                                              
-                                             else if([urlString isEqualToString:more_info])
+                                             else if([urlString isEqualToString:download_card])
                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"more_info"
                                                                                                      object:nil userInfo:diction];
                                              
+                                             else if([urlString isEqualToString:card_json_modify])
+                                             {
+                                                 NSLog(@"카드 변경 성공");
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"card_upload"
+                                                                                                     object:nil userInfo:diction];
+                                             }
+                                             else if([urlString isEqualToString:delete_card])
+                                             {
+                                                 NSLog(@"카드 삭제 성공");
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"delete_card"
+                                                                                                     object:nil userInfo:diction];
+                                             }
+                                             
+                                             else if([urlString isEqualToString:delete_picture])
+                                             {
+                                                 NSLog(@"카드 이미지 삭제 성공");
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"delete_picture"
+                                                                                                     object:nil userInfo:diction];
+                                             }
+                                             
+            
+                                         }
+                                         
+                                         else{
+                                        
+                                             NSLog(@"서버에서 정보 못받아옴!");
+                                             
+                                             if([urlString isEqualToString:random_info])
+                                                 [_search_delegate response_brief_info:nil];
+                                             
+                                             else if([urlString isEqualToString:interest_info])
+                                              [_search_delegate response_brief_info:nil];
+                                             
+                                             else if([urlString isEqualToString:download_card])
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"more_info"
+                                                                                                     object:nil userInfo:nil];
+                                             
+                                             else if([urlString isEqualToString:card_json_modify])
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"card_upload"
+                                                                                                     object:nil userInfo:nil];
+                                             
+                                             else if([urlString isEqualToString:delete_card])
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"delete_card"
+                                                                                                     object:nil userInfo:nil];
+                        
                                              
                                          }
+                                         
+                                         
                                          
                                      }]resume];
     
@@ -312,7 +362,7 @@
 }
 
 
-- (void) uploadImageLegacy:(NSArray*)images json:(NSString*)jsonString{
+- (void) uploadImageLegacy:(NSMutableArray*)images json:(NSString*)jsonString{
     //upload single image
     NSURL *url = [NSURL URLWithString:card_image_upload];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
@@ -322,22 +372,23 @@
     
     NSMutableData *dataForm = [NSMutableData alloc];
     
-
+    NSLog(@"%lu",(unsigned long)[images count]);
+    
     for(int i=0; i<[images count]; i++)
     {
         Image *image=[images objectAtIndex:i];
         //image
         [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
         
-         if(i==[images count]-1)
-          [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"main.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-         else
-          [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%d.jpg\"\r\n",i] dataUsingEncoding:NSUTF8StringEncoding]];
+        if(i==[images count]-1)
+            [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"main.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        else
+            [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%d.jpg\"\r\n",i] dataUsingEncoding:NSUTF8StringEncoding]];
         
         [dataForm appendData:[[NSString stringWithFormat:@"Content-Type:image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         
-       
-         [dataForm appendData:[NSData dataWithData:image.image]];
+        
+        [dataForm appendData:[NSData dataWithData:image.image]];
         [dataForm  appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
@@ -358,16 +409,89 @@
     
     
     NSLog(@"리퀘스트는 ");
-  
+    
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession* urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:(id)self delegateQueue:nil];
-    NSURLSessionUploadTask *uploadTask = [urlSession uploadTaskWithRequest:request fromData:dataForm];
-    [uploadTask resume];
     
-   
+    [[urlSession uploadTaskWithRequest:request fromData:dataForm completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError){
+        
+        if ([data length] > 0 && connectionError == nil)
+        {
+            
+            NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+            
+            NSLog(@"카드 업로드 성공");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"card_upload"
+                                                                object:nil userInfo:diction];
+        }
+        
+        
+    }]resume];
     
 }
 
 
+- (void) card_image_add:(Image*)image json:(NSDictionary*)diction{
+    //upload single image
+    NSURL *url = [NSURL URLWithString:insert_picture];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
+    [request setHTTPMethod:@"POST"];
+    NSString *contentTypeValue = [NSString stringWithFormat:@"multipart/form-data; boundary=%s", POST_BODY_BOURDARY];
+    [request addValue:contentTypeValue forHTTPHeaderField:@"Content-type"];
+    
+    NSMutableData *dataForm = [NSMutableData alloc];
+    
+    NSString *jsonString=[diction objectForKey:@"JsonData"];
+
+    //image
+    [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+
+     [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"picture\"; filename=\"%@.jpg\"\r\n",[diction objectForKey:@"index"]] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [dataForm appendData:[[NSString stringWithFormat:@"Content-Type:image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    [dataForm appendData:[NSData dataWithData:image.image]];
+    [dataForm  appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    //json
+    [dataForm appendData:[[NSString stringWithFormat:@"--%s\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Disposition: form-data; name=\"json\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Type: application/json; charset=UTF-8\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [dataForm appendData:[@"Content-Transfer-Encoding: 8bit\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [dataForm appendData:[[NSString stringWithFormat:@"%@\r\n", jsonString] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //close
+    [dataForm appendData:[[NSString stringWithFormat:@"--%s--\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [request setHTTPBody:dataForm];
+    
+    
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:(id)self delegateQueue:nil];
+    
+    [[urlSession uploadTaskWithRequest:request fromData:dataForm completionHandler:^(NSData *data,NSURLResponse *response,NSError *connectionError){
+        
+        if ([data length] > 0 && connectionError == nil)
+        {
+            
+            NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSDictionary *diction = [NSJSONSerialization JSONObjectWithData:[html dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:&error];
+            
+            NSLog(@"이미지추가 성공");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"add_image"
+                                                                object:nil userInfo:diction];
+        }
+        
+        
+    }]resume];
+    
+}
 
 @end

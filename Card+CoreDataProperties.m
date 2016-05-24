@@ -2,7 +2,7 @@
 //  Card+CoreDataProperties.m
 //  IAM_IOS_ObjectiveC
 //
-//  Created by KMK on 2016. 5. 13..
+//  Created by KMK on 2016. 5. 18..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,8 +20,10 @@
 @dynamic phone_number;
 @dynamic sns_list;
 @dynamic status_message;
+@dynamic card_number;
 @dynamic card_images;
 @dynamic card_videos;
 @dynamic myinfo;
+@dynamic otherinfo;
 
 @end

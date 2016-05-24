@@ -31,15 +31,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4H2-4z-0jC" userLabel="like_button">
-                                <rect key="frame" x="339" y="29" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="13z-0U-vbE"/>
-                                    <constraint firstAttribute="width" secondItem="4H2-4z-0jC" secondAttribute="height" multiplier="1:1" id="6vH-cB-TwI"/>
-                                    <constraint firstAttribute="height" constant="32" id="O88-9y-bjt"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="star.png"/>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="L9j-vc-yS9">
                                 <rect key="frame" x="25" y="17" width="92" height="92"/>
                                 <constraints>
@@ -53,6 +44,12 @@
                                 </constraints>
                                 <color key="color" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvA-DG-9ob">
+                                <rect key="frame" x="149" y="76" width="242" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -60,15 +57,16 @@
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="top" secondItem="L9j-vc-yS9" secondAttribute="top" id="0Vi-fH-5Nt"/>
                             <constraint firstItem="L9j-vc-yS9" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="25" id="1m6-TO-ipg"/>
                             <constraint firstAttribute="bottom" secondItem="L9j-vc-yS9" secondAttribute="bottom" constant="20" id="1zz-iO-ogs"/>
+                            <constraint firstItem="gvA-DG-9ob" firstAttribute="trailing" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" id="3lJ-74-845"/>
                             <constraint firstItem="ii6-dK-VId" firstAttribute="leading" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" constant="-210" id="49R-R4-sS4"/>
                             <constraint firstAttribute="bottom" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" id="ALT-fa-Zj5"/>
+                            <constraint firstItem="gvA-DG-9ob" firstAttribute="top" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" constant="-53" id="I3s-tV-jMm"/>
                             <constraint firstItem="L9j-vc-yS9" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="17" id="JBM-FC-awb"/>
                             <constraint firstAttribute="trailing" secondItem="Vhy-lS-Pw7" secondAttribute="trailing" constant="8" id="XI6-Sa-ev1"/>
-                            <constraint firstItem="4H2-4z-0jC" firstAttribute="top" secondItem="UZL-KT-LBC" secondAttribute="top" constant="29" id="aS1-ST-6ud"/>
                             <constraint firstItem="Qfo-yQ-9Bm" firstAttribute="leading" secondItem="L9j-vc-yS9" secondAttribute="trailing" constant="32" id="e03-au-5aL"/>
-                            <constraint firstAttribute="trailing" secondItem="4H2-4z-0jC" secondAttribute="trailing" constant="28" id="hIZ-zd-e4q"/>
                             <constraint firstItem="Vhy-lS-Pw7" firstAttribute="leading" secondItem="UZL-KT-LBC" secondAttribute="leading" constant="8" id="sNp-s9-RSd"/>
                             <constraint firstItem="ii6-dK-VId" firstAttribute="top" secondItem="Vhy-lS-Pw7" secondAttribute="bottom" constant="-74" id="xgf-Z4-k5N"/>
+                            <constraint firstItem="gvA-DG-9ob" firstAttribute="leading" secondItem="Qfo-yQ-9Bm" secondAttribute="leading" id="y2R-M2-9x9"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -82,7 +80,7 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="back_image" destination="Vhy-lS-Pw7" id="OaU-Q7-1MM"/>
-                <outlet property="like_button" destination="4H2-4z-0jC" id="Ynj-S2-kzu"/>
+                <outlet property="keyword" destination="gvA-DG-9ob" id="bng-5O-tnO"/>
                 <outlet property="name" destination="Qfo-yQ-9Bm" id="znx-Uq-haZ"/>
                 <outlet property="profile_image" destination="L9j-vc-yS9" id="SBu-Sk-yxi"/>
                 <outlet property="progressing" destination="ii6-dK-VId" id="J45-x8-B2C"/>
@@ -93,6 +91,5 @@
     <resources>
         <image name="card_shadow.png" width="1047" height="373"/>
         <image name="image_empty.png" width="996" height="768"/>
-        <image name="star.png" width="65" height="65"/>
     </resources>
 </document>

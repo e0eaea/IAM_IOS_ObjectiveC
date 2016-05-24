@@ -67,9 +67,11 @@
     else
     {NSLog(@"카드갯수는 %lu개",[_my_card.card_images count]);}
     
-    for( Image *image_data in _my_card.card_images)
-        [_arrPageImages addObject:image_data];
+    NSSortDescriptor *imageSort = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:NO];
+    NSArray *sortedcard =  [_my_card.card_images sortedArrayUsingDescriptors:@[imageSort]];
     
+    
+    [_arrPageImages addObjectsFromArray:sortedcard];
     
 }
 

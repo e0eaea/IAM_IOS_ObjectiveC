@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3B128731CAFB6E2005FBCB9"
-               BuildableName = "IAM_IOS_ObjectiveC.app"
-               BlueprintName = "IAM_IOS_ObjectiveC"
-               ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+               BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.app"
+               BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;"
+               ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3B1288F1CAFB6E3005FBCB9"
-               BuildableName = "IAM_IOS_ObjectiveCTests.xctest"
-               BlueprintName = "IAM_IOS_ObjectiveCTests"
-               ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+               BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xctest"
+               BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;Tests"
+               ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3B1289A1CAFB6E3005FBCB9"
-               BuildableName = "IAM_IOS_ObjectiveCUITests.xctest"
-               BlueprintName = "IAM_IOS_ObjectiveCUITests"
-               ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+               BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xctest"
+               BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;UITests"
+               ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A3B128731CAFB6E2005FBCB9"
-            BuildableName = "IAM_IOS_ObjectiveC.app"
-            BlueprintName = "IAM_IOS_ObjectiveC"
-            ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+            BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.app"
+            BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;"
+            ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A3B128731CAFB6E2005FBCB9"
-            BuildableName = "IAM_IOS_ObjectiveC.app"
-            BlueprintName = "IAM_IOS_ObjectiveC"
-            ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+            BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.app"
+            BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;"
+            ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A3B128731CAFB6E2005FBCB9"
-            BuildableName = "IAM_IOS_ObjectiveC.app"
-            BlueprintName = "IAM_IOS_ObjectiveC"
-            ReferencedContainer = "container:IAM_IOS_ObjectiveC.xcodeproj">
+            BuildableName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.app"
+            BlueprintName = "&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;"
+            ReferencedContainer = "container:&#x1100;&#x116a;&#x11ab;&#x1109;&#x1175;&#x11b7;&#x1106;&#x1167;&#x11bc;&#x1112;&#x1161;&#x11b7;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

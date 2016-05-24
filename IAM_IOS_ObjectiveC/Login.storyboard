@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -19,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-uC-L87">
-                                <rect key="frame" x="-8" y="0.0" width="391" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXq-W0-vVF" userLabel="Next">
-                                <rect key="frame" x="57" y="400" width="261" height="54"/>
+                                <rect key="frame" x="49" y="545" width="277" height="63"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="1r6-8u-dGi"/>
-                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="29:6" id="DVI-QC-J2q"/>
-                                    <constraint firstAttribute="width" constant="261" id="yt5-Bx-IAN"/>
+                                    <constraint firstAttribute="width" constant="277" id="17y-rL-qRh"/>
+                                    <constraint firstAttribute="height" constant="63" id="ahO-9k-vfR"/>
+                                    <constraint firstAttribute="width" secondItem="FXq-W0-vVF" secondAttribute="height" multiplier="277:63" id="mhq-jI-cn5"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="KakaoLogin.png"/>
                                 <connections>
@@ -36,22 +35,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="DuY-uC-L87" secondAttribute="trailing" constant="-24" id="09h-Ib-hSk"/>
-                            <constraint firstItem="DuY-uC-L87" firstAttribute="top" secondItem="OUe-vo-aNh" secondAttribute="bottom" constant="-20" id="0OE-wP-2pp"/>
-                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="213" id="BoX-nQ-VrH"/>
-                            <constraint firstItem="FXq-W0-vVF" firstAttribute="centerX" secondItem="wAx-1c-Opw" secondAttribute="centerX" id="JSZ-SH-yka"/>
-                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="DuY-uC-L87" secondAttribute="bottom" id="gL4-pu-Ojc"/>
-                            <constraint firstItem="DuY-uC-L87" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leadingMargin" constant="-24" id="nzL-dK-4NH"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="bottom" secondItem="faN-B0-gnE" secondAttribute="top" id="6cu-sW-X2q"/>
+                            <constraint firstAttribute="trailing" secondItem="DuY-uC-L87" secondAttribute="trailing" id="9NX-Uc-FEh"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="top" secondItem="wAx-1c-Opw" secondAttribute="top" id="MaA-Jf-yNx"/>
+                            <constraint firstItem="faN-B0-gnE" firstAttribute="top" secondItem="FXq-W0-vVF" secondAttribute="bottom" constant="59" id="b3G-ZN-MLG"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="centerX" secondItem="FXq-W0-vVF" secondAttribute="centerX" id="tAE-Kb-vU6"/>
+                            <constraint firstItem="DuY-uC-L87" firstAttribute="leading" secondItem="wAx-1c-Opw" secondAttribute="leading" id="yN6-xW-2Zc"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="kakao_button" destination="FXq-W0-vVF" id="BjG-ja-Yqr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1N-fw-eaH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145.5" y="306.5"/>
+            <point key="canvasLocation" x="-118.5" y="192.5"/>
         </scene>
     </scenes>
     <resources>

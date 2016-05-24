@@ -2,7 +2,7 @@
 //  Card+CoreDataProperties.h
 //  IAM_IOS_ObjectiveC
 //
-//  Created by KMK on 2016. 5. 13..
+//  Created by KMK on 2016. 5. 18..
 //  Copyright © 2016년 KMK. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,9 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *phone_number;
 @property (nullable, nonatomic, retain) NSString *sns_list;
 @property (nullable, nonatomic, retain) NSString *status_message;
+@property (nonatomic) int16_t card_number;
 @property (nullable, nonatomic, retain) NSSet<Image *> *card_images;
-@property (nullable, nonatomic, retain) NSSet<Video *> *card_videos;
+@property (nullable, nonatomic, retain) NSOrderedSet<Video *> *card_videos;
 @property (nullable, nonatomic, retain) MyInfo *myinfo;
+@property (nullable, nonatomic, retain) Other_Info *otherinfo;
 
 @end
 
@@ -35,10 +37,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addCard_images:(NSSet<Image *> *)values;
 - (void)removeCard_images:(NSSet<Image *> *)values;
 
+- (void)insertObject:(Video *)value inCard_videosAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromCard_videosAtIndex:(NSUInteger)idx;
+- (void)insertCard_videos:(NSArray<Video *> *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeCard_videosAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInCard_videosAtIndex:(NSUInteger)idx withObject:(Video *)value;
+- (void)replaceCard_videosAtIndexes:(NSIndexSet *)indexes withCard_videos:(NSArray<Video *> *)values;
 - (void)addCard_videosObject:(Video *)value;
 - (void)removeCard_videosObject:(Video *)value;
-- (void)addCard_videos:(NSSet<Video *> *)values;
-- (void)removeCard_videos:(NSSet<Video *> *)values;
+- (void)addCard_videos:(NSOrderedSet<Video *> *)values;
+- (void)removeCard_videos:(NSOrderedSet<Video *> *)values;
 
 @end
 

@@ -159,11 +159,11 @@
         }
         
         else{
-            UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Login" bundle:[NSBundle mainBundle]];
-            UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+            UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            UIViewController* viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
             
             [_window setRootViewController:viewController];
-
+            
             
         }
         

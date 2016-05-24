@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Card.h"
+#import "MyInfo.h"
+
 
 @interface KeywordViewController : UIViewController
 
-- (void) set_keyword:(NSString*) keywords;
+- (void) set_keyword:(Card*) card;
+- (void) set_search_keyword:(MyInfo *) myinfo;
 
 @end

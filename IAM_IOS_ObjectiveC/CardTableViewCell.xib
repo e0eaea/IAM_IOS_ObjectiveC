@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -27,8 +26,8 @@
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tb0-u0-3gM" userLabel="card_open">
                         <rect key="frame" x="369" y="15" width="71" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="29" id="Z43-9e-N7c"/>
-                            <constraint firstAttribute="width" constant="71" id="yVP-GI-4bB"/>
+                            <constraint firstAttribute="height" constant="29" id="0w7-9o-dCp"/>
+                            <constraint firstAttribute="width" constant="71" id="jVw-lT-HKg"/>
                         </constraints>
                         <state key="normal" backgroundImage="on.png"/>
                         <connections>
@@ -38,34 +37,29 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardName.png" translatesAutoresizingMaskIntoConstraints="NO" id="3fe-bF-tv7">
                         <rect key="frame" x="8" y="115" width="445" height="57"/>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1A-HM-Ii6" userLabel="card_title">
-                        <rect key="frame" x="8" y="115" width="445" height="57"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="57" id="C4X-sc-tQb"/>
-                            <constraint firstAttribute="width" secondItem="D1A-HM-Ii6" secondAttribute="height" multiplier="445:57" id="f84-kK-Xz2"/>
-                        </constraints>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1A-HM-Ii6" userLabel="card_title">
+                        <rect key="frame" x="56" y="115" width="397" height="57"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3fe-bF-tv7" firstAttribute="leading" secondItem="D1A-HM-Ii6" secondAttribute="leading" id="6ac-KE-uLs"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="NFh-AB-Xu9"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Tb0-u0-3gM" secondAttribute="trailing" constant="13" id="QET-PB-4sp"/>
-                    <constraint firstItem="3fe-bF-tv7" firstAttribute="top" secondItem="D1A-HM-Ii6" secondAttribute="top" id="Reu-9d-vEg"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="leading" secondItem="D1A-HM-Ii6" secondAttribute="leading" id="UXL-Ru-dsh"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="bottom" secondItem="D1A-HM-Ii6" secondAttribute="bottom" id="Xqn-2d-LiP"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Vdw-JD-j43" secondAttribute="bottom" constant="-4.5" id="aav-yv-UF2"/>
-                    <constraint firstItem="3fe-bF-tv7" firstAttribute="trailing" secondItem="D1A-HM-Ii6" secondAttribute="trailing" id="avu-85-a86"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="D1A-HM-Ii6" secondAttribute="bottom" constant="-4" id="b6u-Yb-O5Y"/>
-                    <constraint firstItem="Tb0-u0-3gM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="bL0-o0-WvC"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="fjP-Mi-nSD"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="jL7-U5-Rf0"/>
-                    <constraint firstItem="Vdw-JD-j43" firstAttribute="trailing" secondItem="D1A-HM-Ii6" secondAttribute="trailing" id="jw6-RG-6Q5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="D1A-HM-Ii6" secondAttribute="trailing" id="rTu-vs-s2D"/>
-                    <constraint firstItem="3fe-bF-tv7" firstAttribute="bottom" secondItem="Vdw-JD-j43" secondAttribute="bottom" id="s3Z-IS-OwL"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="D1A-HM-Ii6" secondAttribute="leading" id="uNz-ig-DWq"/>
+                    <constraint firstItem="3fe-bF-tv7" firstAttribute="top" secondItem="D1A-HM-Ii6" secondAttribute="top" id="6mE-sx-Eb9"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="D1A-HM-Ii6" secondAttribute="bottom" constant="-4" id="6py-bP-Qww"/>
+                    <constraint firstItem="Vdw-JD-j43" firstAttribute="leading" secondItem="3fe-bF-tv7" secondAttribute="leading" id="Muy-HS-IlJ"/>
+                    <constraint firstItem="3fe-bF-tv7" firstAttribute="bottom" secondItem="D1A-HM-Ii6" secondAttribute="bottom" id="PEc-d1-hDo"/>
+                    <constraint firstItem="D1A-HM-Ii6" firstAttribute="trailing" secondItem="3fe-bF-tv7" secondAttribute="trailing" id="XbS-w4-LQT"/>
+                    <constraint firstItem="Vdw-JD-j43" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Zie-SB-tbz"/>
+                    <constraint firstItem="Vdw-JD-j43" firstAttribute="trailing" secondItem="3fe-bF-tv7" secondAttribute="trailing" id="bgK-Z6-sUa"/>
+                    <constraint firstItem="D1A-HM-Ii6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="48" id="dck-xp-WfZ"/>
+                    <constraint firstItem="D1A-HM-Ii6" firstAttribute="top" secondItem="Vdw-JD-j43" secondAttribute="bottom" constant="-57" id="emS-rF-uyx"/>
+                    <constraint firstItem="Tb0-u0-3gM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="fRd-fA-kFw"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3fe-bF-tv7" secondAttribute="bottom" constant="-4.5" id="gCh-kR-0LX"/>
+                    <constraint firstItem="3fe-bF-tv7" firstAttribute="bottom" secondItem="Vdw-JD-j43" secondAttribute="bottom" id="nHu-4s-2gj"/>
+                    <constraint firstItem="Vdw-JD-j43" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nce-Oy-FgS"/>
+                    <constraint firstItem="Vdw-JD-j43" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="x9Z-Nb-hgX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Tb0-u0-3gM" secondAttribute="trailing" constant="13" id="xxi-g9-gVt"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

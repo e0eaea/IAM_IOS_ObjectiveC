@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15A284" minimumToolsVersion="Automatic">
     <entity name="Card" representedClassName="Card" syncable="YES">
+        <attribute name="card_number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="keyword" optional="YES" attributeType="String" defaultValueString="null" syncable="YES"/>
         <attribute name="main_image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" defaultValueString="null" syncable="YES"/>
@@ -9,26 +10,37 @@
         <attribute name="sns_list" optional="YES" attributeType="String" defaultValueString="null" syncable="YES"/>
         <attribute name="status_message" optional="YES" attributeType="String" defaultValueString="null" syncable="YES"/>
         <relationship name="card_images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="card" inverseEntity="Image" syncable="YES"/>
-        <relationship name="card_videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Video" inverseName="card" inverseEntity="Video" syncable="YES"/>
-        <relationship name="myinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyInfo" inverseName="mycards" inverseEntity="MyInfo" syncable="YES"/>
+        <relationship name="card_videos" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Video" inverseName="card" inverseEntity="Video" syncable="YES"/>
+        <relationship name="myinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyInfo" inverseName="mycards" inverseEntity="MyInfo" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <relationship name="otherinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Other_Info" inverseName="other_cards" inverseEntity="Other_Info" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="card_images" inverseEntity="Card" syncable="YES"/>
     </entity>
     <entity name="MyInfo" representedClassName="MyInfo" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="keyword" optional="YES" attributeType="String" defaultValueString="null" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="interest_other" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Other_Info" inverseName="myinfo" inverseEntity="Other_Info" syncable="YES"/>
         <relationship name="mycards" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Card" inverseName="myinfo" inverseEntity="Card" syncable="YES"/>
+    </entity>
+    <entity name="Other_Info" representedClassName="Other_Info" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="myinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MyInfo" inverseName="interest_other" inverseEntity="MyInfo" syncable="YES"/>
+        <relationship name="other_cards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Card" inverseName="otherinfo" inverseEntity="Card" syncable="YES"/>
     </entity>
     <entity name="Video" representedClassName="Video" syncable="YES">
         <attribute name="video" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="card" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Card" inverseName="card_videos" inverseEntity="Card" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-171" positionY="72" width="128" height="193"/>
-        <element name="Image" positionX="97" positionY="54" width="128" height="73"/>
-        <element name="MyInfo" positionX="-362" positionY="153" width="128" height="90"/>
+        <element name="Card" positionX="-126" positionY="-10" width="128" height="223"/>
+        <element name="Image" positionX="97" positionY="54" width="128" height="88"/>
+        <element name="MyInfo" positionX="-432" positionY="95" width="128" height="118"/>
+        <element name="Other_Info" positionX="-351" positionY="299" width="128" height="103"/>
         <element name="Video" positionX="97" positionY="153" width="128" height="73"/>
     </elements>
 </model>

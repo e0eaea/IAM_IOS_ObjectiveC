@@ -32,7 +32,8 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (void)connectToServer:(NSString*)jsonString url:(NSString *)urlString;
-- (void) uploadImageLegacy:(NSArray*)images json:(NSString*)jsonString;
+- (void) uploadImageLegacy:(NSMutableArray*)images json:(NSString*)jsonString;
+- (void) card_image_add:(Image*)image json:(NSDictionary*)diction;
 - (void) logout;
 - (MyInfo *)getMyInfo;
 - (void) saveData:(NSDictionary *)data ;

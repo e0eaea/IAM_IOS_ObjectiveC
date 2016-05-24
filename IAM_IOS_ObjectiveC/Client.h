@@ -10,19 +10,25 @@
 #import "NSData+Base64.h"
 #import "AppDelegate.h"
 #import "Common_Modules.h"
+#import "MyInfo.h"
+#import "Card.h"
 
 @interface Client : NSObject
 
+
 @property (nonatomic) bool status;
+@property (strong, nonatomic) MyInfo * myinfo;
+@property (strong, nonatomic) Card * card;
 @property (strong, nonatomic) NSString* id;
-@property (strong, nonatomic) NSString* name;
-@property (strong, nonatomic) NSData* base64_image;
+
 @property (nonatomic) int usebit;
 
 - (id) initWithClientID:(NSString*)client_id;
 
-+ (void) request_brief_info:(NSString *)id;
++ (void) request_random_info:(NSString *)id;
 
-+ (void) request_more_info:(NSString *)id;
++ (void) request_interest_info:(NSString *)id keyword:(NSMutableArray*)keyword;
+
++ (void) request_more_info:(NSString *)id card_number:(NSString*)card_number;
 
 @end

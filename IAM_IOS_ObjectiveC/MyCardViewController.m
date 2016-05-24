@@ -17,19 +17,25 @@
 #import "Server_address.h"
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "Size_Define.h"
 
 
 
 @interface MyCardViewController ()<UITabBarDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
+
 @property (strong, nonatomic) IBOutlet UIView *keywordView;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *keyword_buttons;
 
 
 @property (strong, nonatomic) IBOutlet UITextField *name_field;
 @property (strong, nonatomic) IBOutlet UITextField *phone_field;
 @property (strong, nonatomic) IBOutlet UITextView *status_message;
 @property (strong, nonatomic) IBOutlet UITextView *sns_list;
+@property (strong, nonatomic) UIView * blind_view;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *keyword_select_button;
@@ -49,19 +55,22 @@
 @property (strong, nonatomic) IBOutlet UIButton *sns_modify;
 @property (strong, nonatomic) IBOutlet UIButton *video_modify;
 
-@property (strong, nonatomic) IBOutlet UIButton *plus_button;
-
-
 @property (nonatomic) int card_index;
 @property (nonatomic) BOOL is_new;
+@property (nonatomic) BOOL flag;
 
 @property(strong, nonatomic) MyInfo * myinfo;
 @property(strong, nonatomic) Card * this_card;
 @property (nonatomic) NSMutableArray* text_views;
 @property (nonatomic) NSMutableArray * on_off_array;
+@property (nonatomic,strong) NSMutableArray* select_keyword;
+@property (nonatomic,strong) NSMutableArray* sns_lists_array;
+
+@property (nonatomic, retain) UIActivityIndicatorView *registrationProgressing;
 
 
 @property (nonatomic, retain) NSManagedObjectContext        *managedObjectContext;
+
 
 @end
 
@@ -73,16 +82,14 @@
     
     _is_new=true;
     _myinfo=info;
-    _card_index=card_num;
-    
-    NSLog(@"새로운카드");
-    
+   
     
     _managedObjectContext = [[[UIApplication sharedApplication] delegate] performSelector:@selector(managedObjectContext)];
     
     _this_card=(Card*)[NSEntityDescription insertNewObjectForEntityForName:@"Card" inManagedObjectContext:_managedObjectContext];
     
     _on_off_array= [NSMutableArray new];
+    _sns_lists_array=[NSMutableArray new];
     
     for(int i=0; i<5; i++)
         [_on_off_array addObject:@"1"];
@@ -90,6 +97,9 @@
     
     _this_card.main_image=UIImagePNGRepresentation([UIImage imageNamed:@"image_empty.png"]);
     [_card_image setBackgroundImage:[UIImage imageWithData:_this_card.main_image] forState:UIControlStateNormal];
+    
+    _this_card.card_number=card_num;
+    
     
 }
 
@@ -113,19 +123,17 @@
 {
     _managedObjectContext = [[[UIApplication sharedApplication] delegate] performSelector:@selector(managedObjectContext)];
     _this_card=card;
+    _myinfo=card.myinfo;
+    
     _is_new=false;
     
-    NSLog(@"가져온 카드상태  %@",_this_card.on_off);
     
     _on_off_array= [NSMutableArray new];
     
     for(int i=0; i<5; i++)
         [_on_off_array addObject:[NSString stringWithFormat:@"%d",[_this_card.on_off characterAtIndex:i]-48]];
     
-    self.title=@"My card";
-    
-    NSLog(@"배열로 변환 %@",_on_off_array);
-    
+    self.title=@"내 카드";
     
 }
 
@@ -147,7 +155,7 @@
     {
         UIButton *button;
         
-  
+        
         if(i==1)
             button=_phone_toggle;
         else if(i==2)
@@ -161,14 +169,11 @@
         if([[_on_off_array objectAtIndex:i] isEqualToString:@"0"])
         { [button setBackgroundImage:[UIImage imageNamed:@"toggle_hide.png"] forState:UIControlStateNormal];
             
-            
-            NSLog(@" 상태확인0 %@",[_on_off_array objectAtIndex:i]);
             [button setTag:i+100];
         }
         else
         { [button setBackgroundImage:[UIImage imageNamed:@"toggle_open.png"] forState:UIControlStateNormal];
             
-            NSLog(@" 상태확인1 %@",[_on_off_array objectAtIndex:i]);
             [button setTag:i];
         }
     }
@@ -228,7 +233,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     _status_message.delegate = (id)self;
     _status_message.text = STATUS_PLACEHOLDER;
     _status_message.textColor = [UIColor lightGrayColor]; //optional
@@ -248,6 +252,8 @@
         [self setting_on_off];
     }
     
+    
+    _flag=false;
     
     [self registerForKeyboardNotifications];
     
@@ -276,6 +282,7 @@
                                                  name:@"delete_image"
                                                object:nil];
     
+    
 }
 
 
@@ -292,11 +299,30 @@
     else
         _this_card.main_image=image_data.image;
     
+
+    NSArray *dictionKeys = @[@"id",@"card_number",@"idx"];
+    NSArray *dictionVals = @[_myinfo.id,[NSString stringWithFormat:@"%d",_this_card.card_number],
+                             [NSString stringWithFormat:@"%d",image_data.index]];
+    
+    NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+    
+    NSString *userJsonData = [Common_modules transToJson:client_data];
+    
+    
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:modify_profile];
+    
     
     [_card_image setBackgroundImage:[UIImage imageWithData:_this_card.main_image] forState:UIControlStateNormal];
     
     
-    NSLog(@"딜리케이트 받음");
+    NSError *error;
+    
+    if (![_managedObjectContext save:&error])
+    {
+        NSLog(@"Problem saving: %@", [error localizedDescription]);
+    }
+
+
     
 }
 
@@ -314,8 +340,31 @@
         [_card_image setBackgroundImage:[UIImage imageWithData:_this_card.main_image] forState:UIControlStateNormal];
     }
     
+    
+    NSArray *dictionKeys = @[@"id",@"card_number",@"idx"];
+    NSArray *dictionVals = @[_myinfo.id,[NSString stringWithFormat:@"%d",_this_card.card_number],
+                             [NSString stringWithFormat:@"%d",image_data.index]];
+    
+    NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+    
+    NSString *userJsonData = [Common_modules transToJson:client_data];
+    
+    
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:delete_picture];
+    
+    
+    
+    
     [_this_card removeCard_imagesObject:image_data];
     
+    
+    NSError *error;
+    
+    if (![_managedObjectContext save:&error])
+    {
+        NSLog(@"Problem saving: %@", [error localizedDescription]);
+    }
+
     
     
     NSLog(@"갯수는  %lu",[_this_card.card_images count]);
@@ -345,9 +394,23 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.tabBarController.tabBar setHidden:YES];
-    [self.navigationController setNavigationBarHidden:NO];
+    
+    
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRGBA:0x01afffff]];
+    
+    
+    _select_keyword=[[NSMutableArray alloc]init];
+    
+    if(![_this_card.keyword isEqualToString:@"null"])
+    {
+        
+        NSArray *s=[_this_card.keyword componentsSeparatedByString:@" "];
+        
+        for ( NSString * component in s )
+            [_select_keyword addObject:component];
+    }
+    
+    [self set_keyword_buttons];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -437,8 +500,7 @@
     
     UIButton *button;
     
-
-
+    
     if(tag==1)
         button=_phone_toggle;
     else if(tag==2)
@@ -508,16 +570,32 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     else
     {
         //처음 사진등록일때
-         if([_this_card.card_images count]==0)
-         { [_card_image setBackgroundImage:image forState:UIControlStateNormal];
-             _this_card.main_image=UIImagePNGRepresentation(image);
-         }
+        if([_this_card.card_images count]==0)
+        { [_card_image setBackgroundImage:image forState:UIControlStateNormal];
+            _this_card.main_image=UIImagePNGRepresentation(image);
+        }
         
         
         NSData *imageData    = UIImagePNGRepresentation(image);
         Image * new_image = (Image *)[NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:_managedObjectContext];
         
         new_image.image=imageData;
+        
+        NSArray * mArray=[_this_card.card_images allObjects];
+        
+        int max=0;
+        for(Image * i in mArray)
+        {
+            if(i.index > max)
+                max=i.index;
+        }
+        
+        int new_image_num=(int)max+1;
+        
+        new_image.index=new_image_num;
+        
+        if(!_is_new)
+            [self add_image_to_server:new_image];
         
         [_this_card addCard_imagesObject:new_image];
         
@@ -528,6 +606,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.tabBarController.tabBar setHidden:NO];
 }
+
+
 
 -(void)imagePickerControllerDidCancel:
 (UIImagePickerController *)picker
@@ -564,38 +644,106 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (void) request_card
 {
     
-    NSLog(@"json 만드는중");
     NSArray *dictionKeys = @[@"id",@"keyword",@"nickname",
                              @"on_off",@"phone_number",@"sns_list",
                              @"status_message",@"card_number",@"image_size"];
     
-   
+    [_sns_lists_array addObject:_this_card.sns_list];
     
-    NSArray *dictionVals = @[_myinfo.id,_this_card.keyword,_this_card.nickname,
-                             _on_off_array,_this_card.phone_number,_this_card.sns_list,
-                             _this_card.status_message,[NSString stringWithFormat:@"%d",_card_index]
+    NSArray *dictionVals = @[_myinfo.id,_select_keyword,_this_card.nickname,
+                             _on_off_array,_this_card.phone_number,_sns_lists_array,
+                             _this_card.status_message,[NSString stringWithFormat:@"%d",_this_card.card_number]
                              ,[NSString stringWithFormat:@"%lu",[_this_card.card_images count]+1]];
     NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
     
     NSString *userJsonData = [Common_modules transToJson:client_data];
-    
-    NSLog(@"json 만드는중2");
+
     
     //사진 배열
-    NSArray *images=[_this_card.card_images allObjects];
+    NSMutableArray *images=[[NSMutableArray alloc]init];
+    
+    for(Image * image in _this_card.card_images)
+        [images addObject:image];
     
     //메인이미지 추가
     Image * main_image = (Image *)[NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:_managedObjectContext];
     main_image.image=_this_card.main_image;
     
-    [images arrayByAddingObject:main_image];
+    [images addObject:main_image];
     
-
-     NSLog(@"json 만드는중3");
+    
     [[[UIApplication sharedApplication] delegate] performSelector:@selector(uploadImageLegacy:json:) withObject:images withObject:userJsonData];
+    
+}
+
+//서버에 카드수정!
+- (void) modify_card
+{
+    
+    NSLog(@"json으로 수정할꺼 만드는중");
+    
+    
+    NSMutableDictionary *change_diction=[NSMutableDictionary dictionaryWithDictionary:[_this_card changedValues]];
+    
+    [change_diction removeObjectForKey:@"card_images"];
+    
+    if([change_diction objectForKey:@"on_off"]!=nil)
+        [change_diction setValue:_on_off_array forKey:@"on_off"];
+    
+    if([change_diction objectForKey:@"keyword"]!=nil)
+        [change_diction setValue:_select_keyword forKey:@"keyword"];
+    
+    if([change_diction objectForKey:@"sns_list"]!=nil)
+        [change_diction setValue:_sns_lists_array forKey:@"sns_list"];
+    
+    if([change_diction count]!=0)
+    {
+        [change_diction setValue:[NSString stringWithFormat:@"%d",_this_card.card_number] forKey:@"card_number"];
+        [change_diction setValue:_myinfo.id forKey:@"id"];
+        
+        
+        NSString *userJsonData = [Common_modules transToJson:change_diction];
+        
+        NSLog(@"바뀐값! %@",userJsonData);
+        
+        [[[UIApplication sharedApplication] delegate] performSelector:@selector(connectToServer:url:) withObject:userJsonData withObject:card_json_modify];
+    }
+    
+    else
+        [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+
+
+- (void) add_image_to_server:(Image*)image
+{
+    
+    NSArray *dictionKeys = @[@"id",@"card_number"];
+    NSArray *dictionVals = @[_myinfo.id,[NSString stringWithFormat:@"%d",_this_card.card_number]];
+    
+    NSDictionary *client_data = [NSDictionary dictionaryWithObjects:dictionVals forKeys:dictionKeys];
+    
+    NSString *userJsonData = [Common_modules transToJson:client_data];
+    
+    NSArray *dictionKey2 = @[@"index",@"JsonData"];
+    NSArray *dictionVal2 = @[[NSString stringWithFormat:@"%d",image.index],userJsonData];
+    
+    NSDictionary *diction = [NSDictionary dictionaryWithObjects:dictionVal2 forKeys:dictionKey2];
+    
+    
+    [[[UIApplication sharedApplication] delegate] performSelector:@selector(card_image_add:json:) withObject:image withObject:diction];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receive_add_image:)
+                                                 name:@"add_image"
+                                               object:nil];
     
     
 }
+
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -632,17 +780,22 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 }
 - (IBAction)done_click:(id)sender {
     
-   
     
-    if([_name_field.text isEqualToString:@""])
+    if([_this_card.keyword isEqualToString:@"null"])
     {
-        [self show_alert:@"오류" message:@"이름을 입력해주세요." yes:@"" no:@""];
+        [self show_alert:@"오류" message:@"키워드를 하나 이상 선택하세요." yes:@"" no:@""];
         return;
     }
     
     if([_this_card.main_image isEqualToData:UIImagePNGRepresentation([UIImage imageNamed:@"image_empty.png"])])
     {
         [self show_alert:@"오류" message:@"메인사진을 등록해주세요." yes:@"" no:@""];
+        return;
+    }
+    
+    if([_name_field.text isEqualToString:@""])
+    {
+        [self show_alert:@"오류" message:@"이름을 입력해주세요." yes:@"" no:@""];
         return;
     }
     
@@ -656,33 +809,113 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     _this_card.sns_list=([_sns_list.text isEqualToString:SNS_PLACEHOLDER])?SNS_PLACEHOLDER:_sns_list.text;
     
     
-    
     NSString *now_status=@"";
     
     for(NSString * bit in _on_off_array)
         now_status=[NSString stringWithFormat:@"%@%@",now_status,bit];
     
     _this_card.on_off=now_status;
-
+    
     
     if(_is_new)
     {
-      [_myinfo addMycardsObject:_this_card];
-      [self request_card];
+        
+        [_myinfo addMycardsObject:_this_card];
+        [self request_card];
         
     }
     
-    NSError *error;
+    else
+        [self modify_card];
     
-    if (![_managedObjectContext save:&error])
+    
+    
+    self.view.userInteractionEnabled=NO;
+    _registrationProgressing = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [_registrationProgressing setFrame:CGRectMake((WINDOW_WIDTH / 2) - 50, (WINDOW_HEIGHT / 2) - 50, 100, 100)];
+    _registrationProgressing.hidesWhenStopped = YES;
+    [_registrationProgressing startAnimating];
+    
+    
+    _blind_view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)];
+    
+    [_blind_view setBackgroundColor:[UIColor blackColor]];
+    [_blind_view setAlpha:0.7];
+    [self.view addSubview:_blind_view];
+    
+    [self.view addSubview:_registrationProgressing];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receive_response_info:)
+                                                 name:@"card_upload"
+                                               object:nil];
+    
+    
+}
+
+
+- (void)receive_response_info:(NSNotification *) notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"card_upload" object:nil];
+
+ 
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        [_registrationProgressing stopAnimating];
+        [_registrationProgressing removeFromSuperview];
+        [_blind_view removeFromSuperview];
+        
+        [self.view setUserInteractionEnabled:YES];
+        
+        NSError *error;
+        
+        if(notification.userInfo ==nil)
+             [self show_alert:@"오류" message:@"서버에 업로드 실패!" yes:@"" no:@""];
+        
+        else
+        {
+            if (![_managedObjectContext save:&error])
+            {
+                NSLog(@"Problem saving: %@", [error localizedDescription]);
+            }
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        
+        }
+       
+        
+        
+    });
+    
+}
+
+- (void)receive_add_image:(NSNotification *) notification
+{
+    
+    if(notification.userInfo ==nil)
     {
-        NSLog(@"Problem saving: %@", [error localizedDescription]);
+        NSLog(@"이미지추가");
+
+        
+        NSError *error;
+        
+        if (![_managedObjectContext save:&error])
+        {
+            NSLog(@"Problem saving: %@", [error localizedDescription]);
+        }
+        
     }
     
-    //  [_myinfo removeMycards:_myinfo.mycards];
+    else
+        [self show_alert:@"오류" message:@"서버에 업로드 실패!" yes:@"" no:@""];
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 - (IBAction)image_click:(id)sender {
     
@@ -701,6 +934,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     
 }
+
+
 
 
 -(void) show_alert:(NSString*)title message:(NSString*)message yes:(NSString*)yes no:(NSString*)no
@@ -748,9 +983,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         [alert addAction:noButton];
     }
     
-   
+    
     [self presentViewController:alert animated:YES completion:nil];
-
+    
 }
 
 - (IBAction)click_keyword:(id)sender {
@@ -758,12 +993,61 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     KeywordViewController *vc = [sb instantiateViewControllerWithIdentifier:@"KeywordViewController"];
     
-    [vc set_keyword:_this_card.keyword];
+    [vc set_keyword:_this_card];
     
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
+
+- (void) set_keyword_buttons
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        int current_num=(int)[_select_keyword count];
+        
+        for(int i=0; i<current_num; i++)
+        {
+            UIButton *button=[_keyword_buttons objectAtIndex:i];
+            
+            [button setBackgroundImage:[UIImage imageNamed:@"keyword.png"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitle:[_select_keyword objectAtIndex:i] forState:UIControlStateNormal];
+        }
+        
+        for(int i=current_num; i<5; i++)
+        {
+            UIButton *button=[_keyword_buttons objectAtIndex:i];
+            [button setBackgroundImage:[UIImage imageNamed:@"keyword_x.png"] forState:UIControlStateNormal];
+            
+            [button setTitle:@"" forState:UIControlStateNormal];
+        }
+        
+    });
+    
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+
+    if([string length]==0){
+        return YES;
+    }
+    
+    /*  limit to only numeric characters  */
+    NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    for (int i = 0; i < [string length]; i++) {
+        unichar c = [string characterAtIndex:i];
+        if ([myCharSet characterIsMember:c]) {
+            return YES;
+        }
+
+    }
+    
+    [self show_alert:@"오류" message:@"숫자만 입력가능합니다." yes:@"" no:@""];
+    return NO;
+    
+}
 
 
 /*

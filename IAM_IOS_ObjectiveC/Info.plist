@@ -28,7 +28,17 @@
 				<string>kakao8a681325f568ae2d7a8ba819e396913a</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1708247782766561</string>
+			</array>
+		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>1708247782766561</string>
+	<key>FacebookDisplayName</key>
+	<string>Minkyu.IOS</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>KAKAO_APP_KEY</key>
@@ -43,6 +53,10 @@
 		<string>kakaolink</string>
 		<string>kakaotalk-4.5.0</string>
 		<string>kakaostory-2.9.0</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -106,6 +120,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

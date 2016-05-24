@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *back_image;
 @property (strong, nonatomic) IBOutlet UIImageView *profile_image;
 @property (strong, nonatomic) IBOutlet UILabel *name;
-@property (strong, nonatomic) IBOutlet UIButton *like_button;
+@property (strong, nonatomic) IBOutlet UILabel *keyword;
 
 @property (strong, nonatomic) Client *client_info;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressing;
