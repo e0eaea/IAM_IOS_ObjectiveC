@@ -15,6 +15,7 @@
 #import "SearchDelegate.h"
 #import "AppDelegate.h"
 #import "KeywordViewController.h"
+#import "Size_Define.h"
 
 
 @interface SearchViewController ()  <CBCentralManagerDelegate, CBPeripheralDelegate,CBPeripheralManagerDelegate,SearchDelegate>
@@ -32,6 +33,9 @@
 @property (strong, nonatomic) CBPeripheralManager       *peripheralManager;
 @property (strong, nonatomic) CBMutableCharacteristic   *transferCharacteristic;
 
+@property (nonatomic, retain) UIActivityIndicatorView *registrationProgressing;
+@property (strong, nonatomic) UIView * blind_view;
+
 
 @property (strong, nonatomic) MyInfo* myInfo;
 @property (nonatomic,strong)  NSMutableArray* select_keyword;
@@ -40,12 +44,17 @@
 @property (nonatomic)  NSMutableArray * black_list;
 
 @property (nonatomic) NSTimer* timer;
+@property (nonatomic) NSTimer * search_timer;
+
 @property (nonatomic) int num;
 @property (nonatomic) bool is_random;
 
 @end
 
 @implementation SearchViewController
+{
+    int search_count;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,11 +74,8 @@
     _timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self
                                             selector:@selector(background_cleaner:) userInfo:nil repeats:YES];
     
-    
-    
+
     _managedObjectContext = [[[UIApplication sharedApplication] delegate] performSelector:@selector(managedObjectContext)];
-    
- 
     
 }
 
@@ -136,10 +142,58 @@
         _is_random=true;
     }
     
-    [self.tableData removeAllObjects];
-    [self.black_list removeAllObjects];
+
+    
+    _tableData=[NSMutableArray new];
+    _black_list=[NSMutableArray new];
     [self.tableView reloadData];
+    
+    [self.centralManager stopScan];
+    
+    search_count=-1;
+    _search_timer=[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(countDown:) userInfo:nil repeats:YES];
+    
+    self.view.userInteractionEnabled=NO;
+    _registrationProgressing = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [_registrationProgressing setFrame:CGRectMake((WINDOW_WIDTH / 2) - 50, (WINDOW_HEIGHT / 2) - 50, 100, 100)];
+    _registrationProgressing.hidesWhenStopped = YES;
+    [_registrationProgressing startAnimating];
+    
+    
+    _blind_view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)];
+    
+    [_blind_view setBackgroundColor:[UIColor blackColor]];
+    [_blind_view setAlpha:0.7];
+    [self.view addSubview:_blind_view];
+    
+    [self.view addSubview:_registrationProgressing];
+    
+
 }
+
+// progress 타이머
+- (void) countDown:(NSTimer *)aTimer {
+    
+    
+    if(search_count>2)
+    {
+        [_search_timer invalidate];
+        [_registrationProgressing stopAnimating];
+        [_registrationProgressing removeFromSuperview];
+        [_blind_view removeFromSuperview];
+        
+        [self.view setUserInteractionEnabled:YES];
+        [self scan];
+
+        
+    }
+   
+    search_count+=1;
+}
+
+
+
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
@@ -255,8 +309,8 @@
     NSLog(@"카드상태는 %@",is_null);
     
     
-    
-    
+    if([_tableData count]>0)
+    {
     for( Client* new_client in _tableData)
         if([client_id isEqualToString:new_client.id])
         {
@@ -264,6 +318,8 @@
             {
                 [_black_list addObject:new_client];
                 [_tableData removeObject:new_client];
+                
+                break;
             }
             
             else
@@ -309,7 +365,7 @@
         
     });
     
-    
+    }
 }
 
 

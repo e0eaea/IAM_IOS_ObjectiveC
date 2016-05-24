@@ -18,6 +18,10 @@
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Size_Define.h"
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+#import <Twitter/Twitter.h>
+@import SafariServices;
 
 
 
@@ -34,7 +38,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *name_field;
 @property (strong, nonatomic) IBOutlet UITextField *phone_field;
 @property (strong, nonatomic) IBOutlet UITextView *status_message;
-@property (strong, nonatomic) IBOutlet UITextView *sns_list;
+@property (strong, nonatomic) IBOutlet UITextField *fb_field;
+@property (strong, nonatomic) IBOutlet UITextField *tw_field;
+
 @property (strong, nonatomic) UIView * blind_view;
 
 
@@ -52,8 +58,12 @@
 @property (strong, nonatomic) IBOutlet UIButton *name_modify;
 @property (strong, nonatomic) IBOutlet UIButton *phone_modify;
 @property (strong, nonatomic) IBOutlet UIButton *status_modify;
-@property (strong, nonatomic) IBOutlet UIButton *sns_modify;
+
 @property (strong, nonatomic) IBOutlet UIButton *video_modify;
+
+@property (strong, nonatomic) IBOutlet UIButton *sns_fb;
+@property (strong, nonatomic) IBOutlet UIButton *sns_tw;
+
 
 @property (nonatomic) int card_index;
 @property (nonatomic) BOOL is_new;
@@ -109,13 +119,12 @@
     _name_modify.hidden=YES;
     _phone_modify.hidden=YES;
     _status_modify.hidden=YES;
-    _sns_modify.hidden=YES;
     
     
     _name_field.userInteractionEnabled=YES;
     _phone_field.userInteractionEnabled=YES;
     _status_message.userInteractionEnabled=YES;
-    _sns_list.userInteractionEnabled=YES;
+
     
 }
 
@@ -142,9 +151,8 @@
 - (void) setting_text_image
 {
     _name_field.text=_this_card.nickname ? _this_card.nickname:NAME_PLACEHOLDER ;
-    _phone_field.text=_this_card.nickname ? _this_card.phone_number:PHONE_PLACEHOLDER ;
-    _status_message.text=_this_card.nickname ? _this_card.status_message:STATUS_PLACEHOLDER ;
-    _sns_list.text=_this_card.nickname ? _this_card.sns_list:SNS_PLACEHOLDER ;
+    _phone_field.text=_this_card.phone_number ? _this_card.phone_number:PHONE_PLACEHOLDER ;
+    _status_message.text=_this_card.status_message ? _this_card.status_message:STATUS_PLACEHOLDER ;
     
     [_card_image setBackgroundImage:[UIImage imageWithData:_this_card.main_image] forState:UIControlStateNormal ];
 }
@@ -205,9 +213,6 @@
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
     
-    if (!CGRectContainsPoint(aRect, _sns_list.frame.origin) ) {
-        [self.scrollView scrollRectToVisible: _sns_list.frame animated:YES];
-    }
 }
 
 
@@ -224,7 +229,6 @@
     {  _name_field.userInteractionEnabled=NO;
         _phone_field.userInteractionEnabled=NO;
         _status_message.userInteractionEnabled=NO;
-        _sns_list.userInteractionEnabled=NO;
     }
 }
 
@@ -237,10 +241,7 @@
     _status_message.text = STATUS_PLACEHOLDER;
     _status_message.textColor = [UIColor lightGrayColor]; //optional
     
-    
-    _sns_list.delegate = (id)self;
-    _sns_list.text = SNS_PLACEHOLDER;
-    _sns_list.textColor = [UIColor lightGrayColor]; //optional
+ 
     
     if(_is_new)
     {
@@ -433,12 +434,6 @@
             textView.textColor = [UIColor blackColor]; //optional
         }
     
-    if([textView isEqual:_sns_list])
-        if ([textView.text isEqualToString:SNS_PLACEHOLDER]) {
-            textView.text = @"";
-            textView.textColor = [UIColor blackColor]; //optional
-        }
-    
     
     [textView becomeFirstResponder];
 }
@@ -451,11 +446,6 @@
             textView.textColor = [UIColor lightGrayColor]; //optional
         }
     
-    if([textView isEqual:_sns_list])
-        if ([textView.text isEqualToString:@""]){
-            textView.text = SNS_PLACEHOLDER;
-            textView.textColor = [UIColor lightGrayColor]; //optional
-        }
     
     [textView resignFirstResponder];
     
@@ -469,7 +459,7 @@
     _name_field.userInteractionEnabled=NO;
     _phone_field.userInteractionEnabled=NO;
     _status_message.userInteractionEnabled=NO;
-    _sns_list.userInteractionEnabled=NO;
+  
     
     [self resignFirstResponder];
     
@@ -479,8 +469,7 @@
     {  _phone_field.userInteractionEnabled=YES; [_phone_field becomeFirstResponder]; }
     else if(tag==2)
     {   _status_message.userInteractionEnabled=YES;  [_status_message becomeFirstResponder]; }
-    else if(tag==3)
-    { _sns_list.userInteractionEnabled=YES;   [_sns_list becomeFirstResponder]; }
+  
 }
 
 
@@ -806,8 +795,18 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     _this_card.status_message=([_status_message.text isEqualToString:STATUS_PLACEHOLDER])?STATUS_PLACEHOLDER:_status_message.text;
     
-    _this_card.sns_list=([_sns_list.text isEqualToString:SNS_PLACEHOLDER])?SNS_PLACEHOLDER:_sns_list.text;
+    if(![_fb_field.text isEqualToString:FB_PLACEHOLDER])
+      [_sns_lists_array addObject:_fb_field.text];
     
+    if([_tw_field.text isEqualToString:TW_PLACEHOLDER])
+      [_sns_lists_array addObject:_tw_field.text];
+    
+    NSString *now_sns=@"";
+    
+    for(NSString * link in _sns_lists_array)
+        now_sns=[NSString stringWithFormat:@"%@%@",now_sns,link];
+    
+    _this_card.sns_list=now_sns;
     
     NSString *now_status=@"";
     
@@ -1046,6 +1045,98 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     [self show_alert:@"오류" message:@"숫자만 입력가능합니다." yes:@"" no:@""];
     return NO;
+    
+}
+- (IBAction)fb_click:(id)sender {
+   
+    ACAccountStore * m_accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *facebookAccountType = [m_accountStore
+                                          accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    NSDictionary *options = @{ACFacebookAppIdKey : [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"],
+                              ACFacebookPermissionsKey : @[@"email"],
+                              ACFacebookAudienceKey:ACFacebookAudienceFriends};
+    
+    
+    [m_accountStore requestAccessToAccountsWithType:facebookAccountType options:options  completion:^(BOOL granted, NSError *error) {
+        
+        NSLog(@"보냄");
+        
+        if(granted)
+        {
+            NSLog(@"들어옴?");
+            NSArray * accounts=[m_accountStore accountsWithAccountType:facebookAccountType];
+            
+            SLRequest *request= [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://graph.facebook.com/me"] parameters:nil ];
+            
+            [request setAccount:[accounts lastObject]];
+            
+            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                
+            
+                    
+        dispatch_async(dispatch_get_main_queue(), ^{
+                    NSDictionary *userDic = [NSJSONSerialization
+                                             JSONObjectWithData:responseData options:0 error:nil];
+                    
+                       _fb_field.text=[NSString stringWithFormat:@"facebook.com/%@",[userDic objectForKey:@"id"]];
+                     
+                 });
+                    
+                
+            }];
+            
+        }
+        else{
+            
+            NSLog(@"실패");
+        }
+        
+    }];
+
+    
+}
+
+- (IBAction)tw_click:(id)sender {
+    /*
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        if (granted) {
+            NSArray *accountArray = [accountStore accountsWithAccountType:accountType];
+            if (accountArray.count > 0) {
+               
+                NSLog(@"트위터계정은 : %@",accountArray);
+            }
+        }
+    }];
+     */
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+        ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+            if (granted) {
+                NSArray *accountArray = [accountStore accountsWithAccountType:accountType];
+                if (accountArray.count > 0) {
+                    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
+                    
+                    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:url parameters:nil];
+                    [request setAccount:[accountArray objectAtIndex:0]];
+                    [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            NSDictionary *userDic = [NSJSONSerialization
+                                                     JSONObjectWithData:responseData options:0 error:nil];
+                            
+                            _tw_field.text=[NSString stringWithFormat:@"twitter.com/%@",[userDic objectForKey:@"screen_name"]];
+                            
+                        });
+                    }];
+                }
+            }
+        }];
+    }
+
     
 }
 

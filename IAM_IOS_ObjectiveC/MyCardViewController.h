@@ -12,7 +12,9 @@
 #define NAME_PLACEHOLDER @"이름을 입력하세요"
 #define PHONE_PLACEHOLDER @"핸드폰 번호를 입력하세요"
 #define STATUS_PLACEHOLDER @"상태메세지를 입력하세요"
-#define SNS_PLACEHOLDER @"SNS 링크를 입력하세요"
+#define FB_PLACEHOLDER @"페이스북을 연동"
+#define TW_PLACEHOLDER @"트위터 연동"
+
 
 @interface MyCardViewController : UIViewController
 

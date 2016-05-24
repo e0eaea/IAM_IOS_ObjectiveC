@@ -80,6 +80,9 @@
 		A39CCA361CF1DF7B0000FED9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39CCA351CF1DF7B0000FED9 /* CoreData.framework */; };
 		A39CCA381CF2F0440000FED9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39CCA371CF2F0440000FED9 /* Social.framework */; };
 		A39CCA3A1CF2F04F0000FED9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39CCA391CF2F04F0000FED9 /* Accounts.framework */; };
+		A39CCA3D1CF443DF0000FED9 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = A39CCA3B1CF443DF0000FED9 /* facebook.png */; };
+		A39CCA3E1CF443DF0000FED9 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = A39CCA3C1CF443DF0000FED9 /* twitter.png */; };
+		A39CCA401CF463AF0000FED9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A39CCA3F1CF463AF0000FED9 /* Twitter.framework */; };
 		A3A8CAB31CD9C0AE0086FA37 /* Menu_close.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A8CAB21CD9C0AE0086FA37 /* Menu_close.png */; };
 		A3A8CAB71CD9C47D0086FA37 /* CardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A8CAB51CD9C47D0086FA37 /* CardTableViewCell.m */; };
 		A3A8CAB81CD9C47D0086FA37 /* CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8CAB61CD9C47D0086FA37 /* CardTableViewCell.xib */; };
@@ -244,6 +247,9 @@
 		A39CCA351CF1DF7B0000FED9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A39CCA371CF2F0440000FED9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A39CCA391CF2F04F0000FED9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		A39CCA3B1CF443DF0000FED9 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		A39CCA3C1CF443DF0000FED9 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		A39CCA3F1CF463AF0000FED9 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A3A8CAB21CD9C0AE0086FA37 /* Menu_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu_close.png; sourceTree = "<group>"; };
 		A3A8CAB41CD9C47D0086FA37 /* CardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTableViewCell.h; sourceTree = "<group>"; };
 		A3A8CAB51CD9C47D0086FA37 /* CardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTableViewCell.m; sourceTree = "<group>"; };
@@ -329,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A39CCA401CF463AF0000FED9 /* Twitter.framework in Frameworks */,
 				A39CCA3A1CF2F04F0000FED9 /* Accounts.framework in Frameworks */,
 				A39CCA381CF2F0440000FED9 /* Social.framework in Frameworks */,
 				A39CCA361CF1DF7B0000FED9 /* CoreData.framework in Frameworks */,
@@ -401,6 +408,8 @@
 		A35511921CBB8B5000536FCD /* Card */ = {
 			isa = PBXGroup;
 			children = (
+				A39CCA3B1CF443DF0000FED9 /* facebook.png */,
+				A39CCA3C1CF443DF0000FED9 /* twitter.png */,
 				A32928BD1CE4751D00BB277A /* main_selected.png */,
 				A32928BE1CE4751D00BB277A /* main_unselected.png */,
 				A37072BA1CDA15EB00B2A385 /* add-new-card.png */,
@@ -486,6 +495,7 @@
 		A3B1286B1CAFB6E2005FBCB9 = {
 			isa = PBXGroup;
 			children = (
+				A39CCA3F1CF463AF0000FED9 /* Twitter.framework */,
 				A3DC60F01CB8C97400651CC8 /* CoreData */,
 				A3B129511CB66374005FBCB9 /* ImageSource */,
 				A3B128761CAFB6E2005FBCB9 /* IAM_IOS_ObjectiveC */,
@@ -950,6 +960,7 @@
 				A38388A61CEB5CD80006486E /* card-manage.png in Resources */,
 				A3BF72D61CED7B4000A2501D /* interest@2x.png in Resources */,
 				A36F0BFC1CE84B4300EDA2DC /* connect-SNS.png in Resources */,
+				A39CCA3D1CF443DF0000FED9 /* facebook.png in Resources */,
 				A3083FA01CD5D3C400F87EC3 /* bar.png in Resources */,
 				A39CCA331CF1D5820000FED9 /* edit-complete.png in Resources */,
 				A35511941CBB8B5900536FCD /* name_bar.png in Resources */,
@@ -980,6 +991,7 @@
 				A3083FA51CD5D3C400F87EC3 /* no_image.png in Resources */,
 				A3B128F21CB29315005FBCB9 /* SearchTableViewCell.xib in Resources */,
 				A35ECBCC1CE86D0100A40043 /* hobby-category.png in Resources */,
+				A39CCA3E1CF443DF0000FED9 /* twitter.png in Resources */,
 				A3B128871CAFB6E2005FBCB9 /* Assets.xcassets in Resources */,
 				A3083FA61CD5D3C400F87EC3 /* no_picture.png in Resources */,
 				A3083FA91CD5D3C400F87EC3 /* plus.png in Resources */,

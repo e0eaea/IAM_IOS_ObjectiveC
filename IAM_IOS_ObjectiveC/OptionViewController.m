@@ -8,8 +8,7 @@
 #import "AppDelegate.h"
 #import "OptionViewController.h"
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
-#import <Social/Social.h>
-#import <Accounts/Accounts.h>
+
 
 
 @interface OptionViewController ()
@@ -39,51 +38,7 @@
         }
     }];
 
-    
-    
-    /*
-    ACAccountStore * m_accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *facebookAccountType = [m_accountStore
-                                          accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-    NSDictionary *options = @{ACFacebookAppIdKey : [[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"],
-                              ACFacebookPermissionsKey : @[@"email"],
-                              ACFacebookAudienceKey:ACFacebookAudienceFriends};
-    
-    
-    [m_accountStore requestAccessToAccountsWithType:facebookAccountType options:options  completion:^(BOOL granted, NSError *error) {
-    
-         NSLog(@"보냄");
-        
-        if(granted)
-        {
-             NSLog(@"들어옴?");
-            NSArray * accounts=[m_accountStore accountsWithAccountType:facebookAccountType];
-            
-            SLRequest *request= [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:@"https://graph.facebook.com/me"] parameters:nil ];
-            
-            [request setAccount:[accounts lastObject]];
-            
-            [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                
-                
-                if (error == nil && ((NSHTTPURLResponse *) urlResponse).statusCode == 200) {
-               
-                NSDictionary *userDic = [NSJSONSerialization
-                                         JSONObjectWithData:responseData options:0 error:nil];
 
-                    NSLog(@"받아온값: %@",userDic);
-                }
-            }];
-        
-        }
-        else{
-            
-            NSLog(@"실패");
-        }
-        
-    }];
-     
-     */
     
 }
 
